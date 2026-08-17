@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ChevronDown, Clock, MapPin, Package } from "lucide-react";
@@ -15,6 +15,11 @@ function Hero() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const yImg = useTransform(scrollYProgress, [0, 1], [0, 130]);
   const yText = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const vidFade = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
+  const [videoOn, setVideoOn] = useState(true);
+  const reducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const scrollToChecker = () => {
     document.getElementById("area-checker")?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -22,6 +27,26 @@ function Hero() {
 
   return (
     <section ref={ref} className="noise relative flex min-h-screen items-center overflow-hidden bg-[#030712]" data-testid="hero-section">
+      {!reducedMotion && (
+        <motion.div style={{ opacity: vidFade }} className="absolute inset-0" aria-hidden="true">
+          <motion.video
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            onEnded={() => setVideoOn(false)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: videoOn ? 0.5 : 0 }}
+            transition={{ duration: 2.6, ease: "easeOut" }}
+            className="h-full w-full object-cover brightness-[0.75] saturate-[1.15]"
+            data-testid="hero-glacier-video"
+          >
+            <source src="/videos/glacier.mp4" type="video/mp4" />
+            <source src="/videos/glacier.webm" type="video/webm" />
+          </motion.video>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#030712]/55 via-[#030712]/30 to-[#030712]" />
+        </motion.div>
+      )}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="animate-mist absolute -left-40 top-1/4 h-[480px] w-[480px] rounded-full bg-cyan-500/10 blur-[130px]" />
         <div className="animate-mist absolute -right-32 bottom-0 h-[420px] w-[420px] rounded-full bg-blue-700/12 blur-[120px]" style={{ animationDelay: "-9s" }} />
@@ -88,10 +113,14 @@ function Hero() {
           <Reveal delay={0.45} y={40}>
             <div className="relative mx-auto max-w-md lg:max-w-none">
               <div
+                className="absolute -inset-3 -rotate-3 rounded-[2.4rem] border border-cyan-400/15"
+                aria-hidden="true"
+              />
+              <div
                 className="absolute inset-0 scale-90 rounded-[2.5rem] bg-cyan-400/20 blur-[70px]"
                 aria-hidden="true"
               />
-              <div className="glow-card animate-float relative overflow-hidden rounded-[2rem] border border-cyan-400/20">
+              <div className="glow-card animate-float relative rotate-2 overflow-hidden rounded-[2rem] border border-cyan-400/20 transition-transform duration-700 hover:rotate-0">
                 <img
                   src="/images/bottles.webp"
                   alt="Ice cold Kirkland, Eska and Compliments water bottles delivered by Drop2Door"
@@ -156,25 +185,26 @@ function Brands() {
               <Link
                 to="/water"
                 data-testid={`brand-card-${p.name.toLowerCase().replace(/[^a-z]+/g, "-")}`}
-                className="glow-card group block overflow-hidden rounded-3xl border border-cyan-400/12 bg-[#081120] transition-transform duration-500 hover:-translate-y-2"
+                className={`group relative block overflow-hidden rounded-3xl border border-cyan-400/15 transition-all duration-500 hover:z-10 hover:rotate-0 hover:shadow-[0_24px_60px_rgba(2,132,199,0.25)] ${
+                  ["sm:-rotate-2", "sm:translate-y-6 sm:rotate-1", "sm:-rotate-1"][i % 3]
+                }`}
               >
-                <div className="relative flex h-64 items-end justify-center overflow-hidden bg-gradient-to-b from-[#0a1a30] to-[#04091a]">
-                  <div className="absolute h-40 w-40 translate-y-10 rounded-full bg-cyan-400/15 blur-3xl transition-all duration-700 group-hover:bg-cyan-400/30" aria-hidden="true" />
+                <div className="relative aspect-[4/5] overflow-hidden bg-[#04091a]">
                   <img
                     src={p.image}
                     alt={p.alt}
                     loading="lazy"
-                    className="relative h-56 object-contain drop-shadow-[0_18px_30px_rgba(2,132,199,0.35)] transition-transform duration-700 group-hover:scale-[1.06]"
+                    style={{ objectPosition: p.pos }}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
                   />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-display text-xl font-bold text-white">{p.name}</h3>
-                    <span className="rounded-full border border-cyan-400/25 px-2.5 py-1 font-mono2 text-[9px] uppercase tracking-[0.14em] text-cyan-300">
-                      {p.tag}
-                    </span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#02050d] via-[#02050d]/25 to-transparent" aria-hidden="true" />
+                  <span className="absolute right-4 top-4 rounded-full border border-cyan-400/30 bg-[#030712]/70 px-3 py-1 font-mono2 text-[9px] uppercase tracking-[0.14em] text-cyan-300 backdrop-blur-sm">
+                    {p.tag}
+                  </span>
+                  <div className="absolute inset-x-0 bottom-0 p-6">
+                    <h3 className="font-display text-2xl font-bold text-white">{p.name}</h3>
+                    <p className="mt-1 text-xs uppercase tracking-[0.16em] text-slate-400">{p.type}</p>
                   </div>
-                  <p className="mt-1 text-xs uppercase tracking-[0.16em] text-slate-500">{p.type}</p>
                 </div>
               </Link>
             </Reveal>

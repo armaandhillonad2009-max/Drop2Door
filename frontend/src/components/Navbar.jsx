@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { NAV_LINKS, SITE, WA_MESSAGES, waChat } from "@/data/site";
+import { NAV_LINKS, WA_MESSAGES, waChat } from "@/data/site";
 import { useQuote } from "@/context/QuoteContext";
-import { PhoenixMark, WhatsAppIcon } from "@/components/icons";
+import { WhatsAppIcon } from "@/components/icons";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -30,16 +30,12 @@ export default function Navbar() {
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 sm:px-8">
-          <Link to="/" data-testid="nav-logo" className="group flex items-center gap-3">
-            <PhoenixMark className="h-10 w-10 transition-transform duration-500 group-hover:scale-105" />
-            <span className="leading-none">
-              <span className="font-display block text-lg font-extrabold tracking-tight text-white">
-                DROP<span className="text-cyan-400">2</span>DOOR
-              </span>
-              <span className="font-mono2 mt-1 block text-[9px] uppercase tracking-[0.32em] text-slate-400">
-                Water Delivery
-              </span>
-            </span>
+          <Link to="/" data-testid="nav-logo" className="group flex items-center">
+            <img
+              src="/images/logo-dark.png"
+              alt="Drop2Door Water Delivery Services"
+              className="h-10 w-auto rounded-md transition-transform duration-500 group-hover:scale-[1.04] sm:h-11"
+            />
           </Link>
 
           <nav className="hidden items-center gap-7 lg:flex" data-testid="nav-links">
@@ -64,11 +60,11 @@ export default function Navbar() {
               href={waChat(WA_MESSAGES.general)}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Chat with us on WhatsApp"
               data-testid="nav-whatsapp-button"
-              className="flex items-center gap-2 rounded-full border border-cyan-400/25 px-4 py-2 text-[13px] font-semibold text-cyan-300 transition-all duration-300 hover:border-cyan-300/60 hover:bg-cyan-400/10"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-cyan-400/25 text-cyan-300 transition-all duration-300 hover:border-cyan-300/60 hover:bg-cyan-400/10 hover:shadow-[0_0_20px_rgba(56,189,248,0.35)]"
             >
-              <WhatsAppIcon className="h-4 w-4" />
-              {SITE.phoneDisplay}
+              <WhatsAppIcon className="h-5 w-5" />
             </a>
             <button
               onClick={() => openQuote("general")}

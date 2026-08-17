@@ -15,7 +15,7 @@ export default function Water() {
         kicker="Water we deliver"
         lines={["Trusted brands.", "Served ice cold."]}
         sub="Spring, distilled and sparkling water from Kirkland, Eska and Compliments. Pricing is quote-based and depends on your location and order size, so message us for exact numbers and current availability."
-        image="/images/bottles.webp"
+        image="/images/panel-glacier.webp"
         title="Water We Deliver | Drop2Door Water Delivery GTA"
       />
 
@@ -25,17 +25,20 @@ export default function Water() {
             {PRODUCTS.map((p, i) => (
               <Reveal key={p.name} delay={0.08 * i}>
                 <article
-                  className="glow-card group flex h-full flex-col overflow-hidden rounded-3xl border border-cyan-400/12 bg-[#081120]"
+                  className={`glow-card group flex h-full flex-col overflow-hidden rounded-3xl border border-cyan-400/12 bg-[#081120] transition-all duration-500 hover:rotate-0 hover:shadow-[0_24px_60px_rgba(2,132,199,0.22)] ${
+                    ["md:-rotate-2", "md:mt-10 md:rotate-1", "md:-rotate-1"][i % 3]
+                  }`}
                   data-testid={`product-card-${p.name.toLowerCase().replace(/[^a-z]+/g, "-")}`}
                 >
-                  <div className="relative flex h-72 items-end justify-center overflow-hidden bg-gradient-to-b from-[#0b1e36] to-[#04091a]">
-                    <div className="absolute h-44 w-44 translate-y-12 rounded-full bg-cyan-400/15 blur-3xl transition-all duration-700 group-hover:bg-cyan-400/30" aria-hidden="true" />
+                  <div className="relative aspect-[3/4] overflow-hidden bg-[#04091a]">
                     <img
                       src={p.image}
                       alt={p.alt}
                       loading="lazy"
-                      className="relative h-64 object-contain drop-shadow-[0_20px_36px_rgba(2,132,199,0.4)] transition-transform duration-700 group-hover:scale-[1.05]"
+                      style={{ objectPosition: p.pos }}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#081120] via-transparent to-transparent" aria-hidden="true" />
                   </div>
                   <div className="flex flex-1 flex-col p-7">
                     <div className="flex items-center justify-between gap-3">

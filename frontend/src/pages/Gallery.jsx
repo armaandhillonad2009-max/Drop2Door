@@ -22,7 +22,7 @@ export default function Gallery() {
 
       <section className="bg-[#030712] py-20 sm:py-28" data-testid="gallery-grid">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid auto-rows-auto grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid auto-rows-auto grid-flow-dense grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {GALLERY.map((g, i) => (
               <Reveal key={g.src} delay={Math.min(i * 0.06, 0.4)} className={SPAN_CLS[g.span]}>
                 <figure

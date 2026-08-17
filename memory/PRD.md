@@ -25,6 +25,14 @@ WhatsApp CTAs with context pre-filled messages; working quote modal + bulk form;
 - Lenis + framer-motion throughout, reduced-motion support, lazy images, webp optimization
 - Netlify config ready
 
+## Iteration 2026-08-17 (v2, owner-requested changes)
+- Navbar: replaced logo lockup with owner's attached logo image (`logo-dark.png`); right corner phone number replaced with icon-only WhatsApp button
+- Hero: glacier motion clip embedded as background (`/videos/glacier.mp4` H.264 + `glacier.webm` VP9 fallback), fades in on load, fades out on scroll and after clip ends; disabled under prefers-reduced-motion
+- Gallery: removed bottle/glacier visuals; added 2 new real photos (`sidewalk.webp` curbside skid, `van-interior.webp` strapped load); grid uses grid-flow-dense
+- Home/Water brand cards: replaced single-bottle crops with tilted editorial cards using full trio photo (`bottles.webp`) with per-brand `pos` object-position focus; hero bottle frame now tilted with offset border
+- Manifesto 04 image swapped to sidewalk.webp; Water page header bg swapped to panel-glacier.webp
+- Deleted bottle-kirkland/eska/compliments crop files
+
 ## Verified
 - curl POST /api/quote and /api/bulk-quote: success + email sent
 - Screenshots: hero, manifesto, modal, checker both verdicts, reviews, mobile home + events
@@ -34,7 +42,6 @@ WhatsApp CTAs with context pre-filled messages; working quote modal + bulk form;
 - P1: Add fixed prices later if owner provides them
 - P2: More real photos (other vans, staff) when available
 - P2: Google review refresh as new reviews come in
-- P2: Higgsfield video hero if a clip is supplied later
 
 ## Notes for Future Edits
 All editable content lives in `src/data/site.js`: SITE contact info, WA_MESSAGES, PRODUCTS, REVIEWS, CITIES, GALLERY, PRODUCT_OPTIONS, TIME_SLOTS. Legal copy in `src/pages/Legal.jsx`.

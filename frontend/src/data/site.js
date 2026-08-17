@@ -40,24 +40,27 @@ export const PRODUCTS = [
     type: "Natural Spring Water",
     note: "A GTA favourite. Crisp spring water in case packs, ready for homes, offices and events.",
     tag: "Case packs",
-    image: "/images/bottle-kirkland.webp",
-    alt: "Kirkland Signature spring water bottle on ice",
+    image: "/images/bottles.webp",
+    pos: "92% 45%",
+    alt: "Kirkland Signature bottle from the Drop2Door chilled lineup on ice",
   },
   {
     name: "Eska",
     type: "Natural Spring Water",
     note: "Quebec spring water with a clean finish. Available in 35-pack cases only.",
     tag: "35-pack cases only",
-    image: "/images/bottle-eska.webp",
-    alt: "Eska natural spring water bottle surrounded by ice",
+    image: "/images/bottles.webp",
+    pos: "45% 40%",
+    alt: "Eska bottle from the Drop2Door chilled lineup on ice",
   },
   {
     name: "Compliments",
     type: "Spring, Distilled & Sparkling",
     note: "Flexible options depending on availability. Ask us what is in stock this week.",
     tag: "Ask availability",
-    image: "/images/bottle-compliments.webp",
-    alt: "Compliments water bottle chilled on ice",
+    image: "/images/bottles.webp",
+    pos: "4% 45%",
+    alt: "Compliments bottle from the Drop2Door chilled lineup on ice",
   },
 ];
 
@@ -163,8 +166,8 @@ export const MANIFESTO = [
     n: "04",
     title: "Across the GTA",
     body: "Brampton, Mississauga, Toronto, Caledon, Milton and the wider GTA. Not sure if we reach you? Ask us on WhatsApp and we will figure it out.",
-    image: "/images/bottles.webp",
-    alt: "Chilled Kirkland, Eska and Compliments bottles on ice",
+    image: "/images/sidewalk.webp",
+    alt: "Drop2Door bulk water delivery staged curbside in the GTA",
   },
 ];
 
@@ -188,10 +191,22 @@ export const GALLERY = [
     span: "tall",
   },
   {
+    src: "/images/van-interior.webp",
+    alt: "Drop2Door vehicle interior with water cases stacked under a delivery dolly",
+    cap: "Every load strapped and organized",
+    span: "std",
+  },
+  {
+    src: "/images/sidewalk.webp",
+    alt: "Full skid of bottled water cases staged curbside for a bulk Drop2Door delivery",
+    cap: "Bulk drops, curbside and on time",
+    span: "tall",
+  },
+  {
     src: "/images/water7.webp",
     alt: "Cases of water delivered to a customer door with a dolly",
     cap: "Doorstep delivery, no heavy lifting",
-    span: "tall",
+    span: "std",
   },
   {
     src: "/images/water5.webp",
@@ -200,34 +215,10 @@ export const GALLERY = [
     span: "wide",
   },
   {
-    src: "/images/hero-strip.webp",
-    alt: "Cinematic Drop2Door visual of chilled bottles on ice",
-    cap: "",
-    span: "wide",
-  },
-  {
-    src: "/images/panel-glacier.webp",
-    alt: "Glacier landscape representing pure spring water",
-    cap: "",
-    span: "std",
-  },
-  {
-    src: "/images/panel-eska.webp",
-    alt: "Close-up of an ice cold Eska bottle with condensation",
-    cap: "",
-    span: "std",
-  },
-  {
-    src: "/images/bottles.webp",
-    alt: "Kirkland, Eska and Compliments bottles standing on ice",
-    cap: "The lineup, ice cold",
-    span: "std",
-  },
-  {
     src: "/images/brand-card.webp",
     alt: "Drop2Door Water Delivery Services brand card with red phoenix logo",
     cap: "",
-    span: "std",
+    span: "wide",
   },
 ];
 
