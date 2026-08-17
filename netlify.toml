@@ -1,0 +1,16 @@
+# Netlify build config for the Drop2Door site.
+# The repo is a monorepo; only frontend/ is deployed. The backend/ directory is
+# not used by the live site — the quote forms are handled by Netlify Forms
+# (see frontend/public/index.html and frontend/src/lib/netlifyForms.js).
+
+[build]
+  base = "frontend"
+  command = "yarn build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "20"
+  # CRA treats lint warnings as build errors when CI=true, which Netlify sets.
+  CI = "false"
+
+# SPA fallback lives in frontend/public/_redirects so it ships with the build.

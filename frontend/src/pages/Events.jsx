@@ -1,13 +1,12 @@
 import { useState } from "react";
-import axios from "axios";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { EVENT_TYPES, FIELD_CLS, LABEL_CLS, PRODUCT_OPTIONS, WA_MESSAGES, waChat } from "@/data/site";
 import PageHeader from "@/components/PageHeader";
 import { Kicker, Reveal } from "@/components/Motion";
 import { WhatsAppIcon } from "@/components/icons";
-
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+import { submitNetlifyForm } from "@/lib/netlifyForms";
+import { ERROR_MSG_CLS, fieldCls, validateContact, validateField } from "@/lib/validation";
 
 const SERVE = [
   "Weddings",
@@ -43,8 +42,18 @@ const EMPTY = {
 
 function BulkForm() {
   const [form, setForm] = useState(EMPTY);
+  const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
-  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const set = (k) => (e) => {
+    const { value } = e.target;
+    setForm((f) => ({ ...f, [k]: value }));
+    // Clear an error as soon as the field becomes valid; never scold mid-typing.
+    setErrors((prev) => (prev[k] && !validateField(k, value) ? { ...prev, [k]: "" } : prev));
+  };
+
+  const blur = (k) => () =>
+    setErrors((prev) => ({ ...prev, [k]: validateField(k, form[k]) }));
 
   const waSummary = () =>
     waChat(
@@ -55,9 +64,15 @@ function BulkForm() {
 
   const submit = async (e) => {
     e.preventDefault();
+    const found = validateContact(form);
+    if (Object.keys(found).length) {
+      setErrors(found);
+      document.getElementById(`b-${Object.keys(found)[0]}`)?.focus();
+      return;
+    }
     setStatus("sending");
     try {
-      await axios.post(`${API}/bulk-quote`, form);
+      await submitNetlifyForm("bulk-quote", form);
       setStatus("success");
     } catch {
       setStatus("idle");
@@ -90,6 +105,7 @@ function BulkForm() {
   return (
     <form
       onSubmit={submit}
+      noValidate
       className="glow-card rounded-3xl border border-cyan-400/15 bg-[#081120] p-7 sm:p-9"
       data-testid="bulk-quote-form"
     >
@@ -100,7 +116,8 @@ function BulkForm() {
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label className={LABEL_CLS} htmlFor="b-name">Name *</label>
-          <input id="b-name" data-testid="bulk-name-input" required className={FIELD_CLS} value={form.name} onChange={set("name")} placeholder="Your name" />
+          <input id="b-name" data-testid="bulk-name-input" required className={fieldCls(FIELD_CLS, errors.name)} value={form.name} onChange={set("name")} onBlur={blur("name")} placeholder="Your name" aria-invalid={!!errors.name} aria-describedby={errors.name ? "b-name-error" : undefined} />
+          {errors.name && <p id="b-name-error" className={ERROR_MSG_CLS} data-testid="bulk-name-error">{errors.name}</p>}
         </div>
         <div>
           <label className={LABEL_CLS} htmlFor="b-org">Organization</label>
@@ -108,11 +125,13 @@ function BulkForm() {
         </div>
         <div>
           <label className={LABEL_CLS} htmlFor="b-email">Email *</label>
-          <input id="b-email" data-testid="bulk-email-input" required type="email" className={FIELD_CLS} value={form.email} onChange={set("email")} placeholder="you@email.com" />
+          <input id="b-email" data-testid="bulk-email-input" required type="email" className={fieldCls(FIELD_CLS, errors.email)} value={form.email} onChange={set("email")} onBlur={blur("email")} placeholder="you@email.com" aria-invalid={!!errors.email} aria-describedby={errors.email ? "b-email-error" : undefined} />
+          {errors.email && <p id="b-email-error" className={ERROR_MSG_CLS} data-testid="bulk-email-error">{errors.email}</p>}
         </div>
         <div>
           <label className={LABEL_CLS} htmlFor="b-phone">Phone *</label>
-          <input id="b-phone" data-testid="bulk-phone-input" required type="tel" className={FIELD_CLS} value={form.phone} onChange={set("phone")} placeholder="(647) 000-0000" />
+          <input id="b-phone" data-testid="bulk-phone-input" required type="tel" className={fieldCls(FIELD_CLS, errors.phone)} value={form.phone} onChange={set("phone")} onBlur={blur("phone")} placeholder="(647) 000-0000" aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "b-phone-error" : undefined} />
+          {errors.phone && <p id="b-phone-error" className={ERROR_MSG_CLS} data-testid="bulk-phone-error">{errors.phone}</p>}
         </div>
         <div>
           <label className={LABEL_CLS} htmlFor="b-type">Event / business type</label>

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import axios from "axios";
 import { CheckCircle2, Loader2, Minus, Plus, X } from "lucide-react";
 import { toast } from "sonner";
 import { useQuote } from "@/context/QuoteContext";
 import { FIELD_CLS, LABEL_CLS, PRODUCT_OPTIONS, SITE, TIME_SLOTS, WA_MESSAGES, waChat } from "@/data/site";
 import { WhatsAppIcon } from "@/components/icons";
-
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+import { submitNetlifyForm } from "@/lib/netlifyForms";
+import { ERROR_MSG_CLS, fieldCls, validateContact, validateField } from "@/lib/validation";
 
 const EMPTY = {
   name: "",
@@ -32,11 +31,13 @@ const TITLES = {
 export default function QuoteModal() {
   const { open, context, closeQuote } = useQuote();
   const [form, setForm] = useState(EMPTY);
+  const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
 
   useEffect(() => {
     if (open) {
       setStatus("idle");
+      setErrors({});
       setForm((f) => ({
         ...EMPTY,
         customer_type: context === "event" ? "Event" : context === "business" ? "Business" : "Residential",
@@ -51,7 +52,15 @@ export default function QuoteModal() {
     };
   }, [open]);
 
-  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+  const set = (k) => (e) => {
+    const { value } = e.target;
+    setForm((f) => ({ ...f, [k]: value }));
+    // Clear an error as soon as the field becomes valid; never scold mid-typing.
+    setErrors((prev) => (prev[k] && !validateField(k, value) ? { ...prev, [k]: "" } : prev));
+  };
+
+  const blur = (k) => () =>
+    setErrors((prev) => ({ ...prev, [k]: validateField(k, form[k]) }));
 
   const bumpQty = (d) =>
     setForm((f) => {
@@ -74,13 +83,19 @@ export default function QuoteModal() {
 
   const submit = async (e) => {
     e.preventDefault();
+    const found = validateContact(form);
+    if (Object.keys(found).length) {
+      setErrors(found);
+      document.getElementById(`q-${Object.keys(found)[0]}`)?.focus();
+      return;
+    }
     if (Number(form.quantity) > 0 && Number(form.quantity) < 10) {
       toast.error("Minimum delivery order is 10 packs/cases.");
       return;
     }
     setStatus("sending");
     try {
-      await axios.post(`${API}/quote`, form);
+      await submitNetlifyForm("quote", form);
       setStatus("success");
     } catch (err) {
       setStatus("idle");
@@ -172,18 +187,21 @@ export default function QuoteModal() {
                   . Otherwise send this form and we will contact you.
                 </p>
 
-                <form onSubmit={submit} className="mt-7 grid grid-cols-1 gap-4 sm:grid-cols-2" data-testid="quote-form">
+                <form onSubmit={submit} noValidate className="mt-7 grid grid-cols-1 gap-4 sm:grid-cols-2" data-testid="quote-form">
                   <div>
                     <label className={LABEL_CLS} htmlFor="q-name">Name *</label>
-                    <input id="q-name" data-testid="quote-name-input" required className={FIELD_CLS} value={form.name} onChange={set("name")} placeholder="Your full name" />
+                    <input id="q-name" data-testid="quote-name-input" required className={fieldCls(FIELD_CLS, errors.name)} value={form.name} onChange={set("name")} onBlur={blur("name")} placeholder="Your full name" aria-invalid={!!errors.name} aria-describedby={errors.name ? "q-name-error" : undefined} />
+                    {errors.name && <p id="q-name-error" className={ERROR_MSG_CLS} data-testid="quote-name-error">{errors.name}</p>}
                   </div>
                   <div>
                     <label className={LABEL_CLS} htmlFor="q-phone">Phone *</label>
-                    <input id="q-phone" data-testid="quote-phone-input" required type="tel" className={FIELD_CLS} value={form.phone} onChange={set("phone")} placeholder="(647) 000-0000" />
+                    <input id="q-phone" data-testid="quote-phone-input" required type="tel" className={fieldCls(FIELD_CLS, errors.phone)} value={form.phone} onChange={set("phone")} onBlur={blur("phone")} placeholder="(647) 000-0000" aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "q-phone-error" : undefined} />
+                    {errors.phone && <p id="q-phone-error" className={ERROR_MSG_CLS} data-testid="quote-phone-error">{errors.phone}</p>}
                   </div>
                   <div>
                     <label className={LABEL_CLS} htmlFor="q-email">Email *</label>
-                    <input id="q-email" data-testid="quote-email-input" required type="email" className={FIELD_CLS} value={form.email} onChange={set("email")} placeholder="you@email.com" />
+                    <input id="q-email" data-testid="quote-email-input" required type="email" className={fieldCls(FIELD_CLS, errors.email)} value={form.email} onChange={set("email")} onBlur={blur("email")} placeholder="you@email.com" aria-invalid={!!errors.email} aria-describedby={errors.email ? "q-email-error" : undefined} />
+                    {errors.email && <p id="q-email-error" className={ERROR_MSG_CLS} data-testid="quote-email-error">{errors.email}</p>}
                   </div>
                   <div>
                     <label className={LABEL_CLS} htmlFor="q-type">Customer type</label>

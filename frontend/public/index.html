@@ -35,10 +35,46 @@
         }
         </script>
         <script>window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);</script>
-        <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root"></div>
+
+        <!--
+          Netlify Forms detection stubs. Netlify parses the built HTML to discover forms,
+          and a React SPA renders its forms in JS, so these hidden copies declare them.
+          Field names must stay in sync with src/components/QuoteModal.jsx and
+          src/pages/Events.jsx, which post to them via src/lib/netlifyForms.js.
+        -->
+        <form name="quote" data-netlify="true" netlify-honeypot="bot-field" hidden>
+            <input type="hidden" name="form-name" value="quote" />
+            <input type="text" name="bot-field" />
+            <input type="text" name="name" />
+            <input type="tel" name="phone" />
+            <input type="email" name="email" />
+            <input type="text" name="address" />
+            <input type="text" name="postal_code" />
+            <input type="text" name="customer_type" />
+            <input type="text" name="product" />
+            <input type="text" name="quantity" />
+            <input type="text" name="preferred_date" />
+            <input type="text" name="preferred_time" />
+            <textarea name="message"></textarea>
+        </form>
+
+        <form name="bulk-quote" data-netlify="true" netlify-honeypot="bot-field" hidden>
+            <input type="hidden" name="form-name" value="bulk-quote" />
+            <input type="text" name="bot-field" />
+            <input type="text" name="name" />
+            <input type="text" name="organization" />
+            <input type="email" name="email" />
+            <input type="tel" name="phone" />
+            <input type="text" name="event_type" />
+            <input type="text" name="event_date" />
+            <input type="text" name="address" />
+            <input type="text" name="quantity" />
+            <input type="text" name="product" />
+            <textarea name="notes"></textarea>
+        </form>
     </body>
 </html>
