@@ -7,6 +7,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        display: ['Outfit', 'sans-serif'],
+        body: ['"Plus Jakarta Sans"', 'sans-serif'],
+        mono2: ['"JetBrains Mono"', 'monospace'],
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',

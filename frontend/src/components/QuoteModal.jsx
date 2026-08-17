@@ -4,7 +4,7 @@ import axios from "axios";
 import { CheckCircle2, Loader2, X } from "lucide-react";
 import { toast } from "sonner";
 import { useQuote } from "@/context/QuoteContext";
-import { FIELD_CLS, LABEL_CLS, PRODUCT_OPTIONS, SITE, TIME_SLOTS, waChat } from "@/data/site";
+import { FIELD_CLS, LABEL_CLS, PRODUCT_OPTIONS, SITE, TIME_SLOTS, WA_MESSAGES, waChat } from "@/data/site";
 import { WhatsAppIcon } from "@/components/icons";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -76,7 +76,7 @@ export default function QuoteModal() {
     } catch (err) {
       setStatus("idle");
       toast.error("Something went wrong sending your request. Please try WhatsApp instead.", {
-        action: { label: "WhatsApp", onClick: () => window.open(waChat(SITE.tagline), "_blank") },
+        action: { label: "WhatsApp", onClick: () => window.open(waChat(WA_MESSAGES.general), "_blank") },
       });
     }
   };
