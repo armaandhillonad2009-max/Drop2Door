@@ -6,6 +6,7 @@ import { MANIFESTO, PRODUCTS, SITE, WA_MESSAGES, waChat } from "@/data/site";
 import { Kicker, MaskedLine, Reveal } from "@/components/Motion";
 import { WhatsAppIcon } from "@/components/icons";
 import Marquee from "@/components/Marquee";
+import Tilt from "@/components/Tilt";
 import AreaChecker from "@/components/AreaChecker";
 import Reviews from "@/components/Reviews";
 import CTABand from "@/components/CTABand";
@@ -150,6 +151,7 @@ function Brands() {
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-3">
           {PRODUCTS.map((p, i) => (
             <Reveal key={p.name} delay={0.1 * i}>
+              <Tilt>
               <Link
                 to="/water"
                 data-testid={`brand-card-${p.name.toLowerCase().replace(/[^a-z]+/g, "-")}`}
@@ -175,6 +177,7 @@ function Brands() {
                   </div>
                 </div>
               </Link>
+              </Tilt>
             </Reveal>
           ))}
         </div>

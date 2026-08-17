@@ -3,12 +3,6 @@ import PageHeader from "@/components/PageHeader";
 import CTABand from "@/components/CTABand";
 import { Reveal } from "@/components/Motion";
 
-const SPAN_CLS = {
-  tall: "row-span-2 h-full min-h-[420px]",
-  wide: "sm:col-span-2 h-72 sm:h-80",
-  std: "h-72 sm:h-80",
-};
-
 export default function Gallery() {
   return (
     <main>
@@ -24,7 +18,7 @@ export default function Gallery() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid auto-rows-auto grid-flow-dense grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {GALLERY.map((g, i) => (
-              <Reveal key={g.src} delay={Math.min(i * 0.06, 0.4)} className={SPAN_CLS[g.span]}>
+              <Reveal key={g.src} delay={Math.min(i * 0.06, 0.4)} className={g.cls}>
                 <figure
                   className="group relative h-full w-full overflow-hidden rounded-3xl border border-cyan-400/10"
                   data-testid={`gallery-item-${i}`}

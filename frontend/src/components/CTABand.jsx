@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { WA_MESSAGES, waChat } from "@/data/site";
 import { useQuote } from "@/context/QuoteContext";
 import { WhatsAppIcon } from "@/components/icons";
@@ -10,8 +11,37 @@ export default function CTABand({
   waMessage = WA_MESSAGES.general,
 }) {
   const { openQuote } = useQuote();
+  const reducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   return (
     <section className="relative overflow-hidden bg-[#030712] py-24 sm:py-32" data-testid="cta-band">
+      {!reducedMotion && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.35 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 2.2, ease: "easeOut" }}
+          className="absolute inset-0"
+          aria-hidden="true"
+        >
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="none"
+            className="h-full w-full object-cover brightness-[0.7] saturate-[1.15]"
+            data-testid="cta-glacier-video"
+          >
+            <source src="/videos/glacier.mp4" type="video/mp4" media="(min-width: 641px)" />
+            <source src="/videos/glacier.webm" type="video/webm" media="(min-width: 641px)" />
+            <source src="/videos/glacier-mobile.mp4" type="video/mp4" />
+            <source src="/videos/glacier-mobile.webm" type="video/webm" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-[#030712]/40 to-[#030712]" />
+        </motion.div>
+      )}
       <div
         className="pointer-events-none absolute inset-x-0 top-1/2 h-[380px] -translate-y-1/2 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent blur-2xl"
         aria-hidden="true"

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, Quote, Star } from "lucide-react";
+import { ArrowUpRight, Star } from "lucide-react";
 import { REVIEWS, SITE } from "@/data/site";
 import { Kicker, Reveal } from "@/components/Motion";
 
@@ -30,8 +30,7 @@ export default function Reviews() {
 
         <Reveal delay={0.1} className="mt-14">
           <div className="glow-card relative overflow-hidden rounded-3xl border border-cyan-400/12 bg-[#081120]/80 p-8 sm:p-14">
-            <Quote className="absolute -top-2 left-6 h-24 w-24 text-cyan-400/8" aria-hidden="true" />
-            <div className="relative min-h-[190px] sm:min-h-[160px]">
+            <div className="relative min-h-[230px] sm:min-h-[210px]">
               <AnimatePresence mode="wait">
                 <motion.figure
                   key={index}
@@ -40,20 +39,21 @@ export default function Reviews() {
                   exit={{ opacity: 0, y: -24 }}
                   transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                   data-testid="review-card"
+                  className="flex flex-col items-center text-center"
                 >
-                  <div className="flex gap-1" aria-label={`${review.stars} star review`}>
+                  <div className="flex items-center justify-center gap-1.5" aria-label={`${review.stars} star review`}>
                     {Array.from({ length: review.stars }).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                      <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <blockquote className="font-display mt-5 text-2xl font-semibold leading-snug text-white sm:text-3xl">
+                  <blockquote className="font-display mx-auto mt-6 max-w-2xl text-2xl font-semibold leading-snug text-white sm:text-3xl">
                     "{review.text}"
                   </blockquote>
-                  <figcaption className="mt-6 flex items-center gap-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-cyan-400/15 font-display text-sm font-bold text-cyan-300">
+                  <figcaption className="mt-7 flex items-center gap-3">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-cyan-400/15 font-display text-sm font-bold text-cyan-300">
                       {review.name.charAt(0)}
                     </span>
-                    <span>
+                    <span className="text-left">
                       <span className="block text-sm font-semibold text-white">{review.name}</span>
                       <span className="block text-xs text-slate-500">Google review</span>
                     </span>
@@ -62,7 +62,7 @@ export default function Reviews() {
               </AnimatePresence>
             </div>
 
-            <div className="mt-8 flex items-center justify-between">
+            <div className="mt-9 flex items-center justify-between border-t border-cyan-400/10 pt-6">
               <div className="flex gap-2">
                 {REVIEWS.map((_, i) => (
                   <button

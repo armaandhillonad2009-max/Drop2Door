@@ -164,7 +164,7 @@ export const MANIFESTO = [
     title: "Across the GTA",
     body: "Brampton, Mississauga, Toronto, Caledon, Milton and the wider GTA. Not sure if we reach you? Ask us on WhatsApp and we will figure it out.",
     image: "/images/sidewalk.webp",
-    alt: "Drop2Door bulk water delivery staged curbside in the GTA",
+    alt: "Drop2Door delivery vehicle interior organized with water cases and a dolly",
   },
 ];
 
@@ -185,43 +185,43 @@ export const GALLERY = [
     src: "/images/vehicle.webp",
     alt: "Drop2Door delivery vehicle loaded with cases of Kirkland water",
     cap: "Loaded and route-ready",
-    span: "tall",
+    cls: "row-span-2 h-full min-h-[420px] lg:col-start-1 lg:row-start-1",
   },
   {
     src: "/images/delivery-stack.webp",
     alt: "Stacked Kirkland and Eska water cases from a Drop2Door delivery",
     cap: "Stacked and staged for handoff",
-    span: "std",
+    cls: "h-72 sm:h-80 lg:col-start-2 lg:row-start-1",
   },
   {
     src: "/images/van-interior.webp",
-    alt: "Drop2Door vehicle interior with water cases stacked under a delivery dolly",
-    cap: "Every load strapped and organized",
-    span: "std",
+    alt: "Full skid of bottled water cases staged curbside for a bulk Drop2Door delivery",
+    cap: "Bulk drops, curbside and on time",
+    cls: "sm:col-span-2 h-72 sm:h-80 lg:col-start-1 lg:col-span-2 lg:row-start-3",
   },
   {
     src: "/images/sidewalk.webp",
-    alt: "Full skid of bottled water cases staged curbside for a bulk Drop2Door delivery",
-    cap: "Bulk drops, curbside and on time",
-    span: "tall",
+    alt: "Drop2Door vehicle interior with water cases stacked under a delivery dolly",
+    cap: "Every load strapped and organized",
+    cls: "sm:col-span-2 h-72 sm:h-80 lg:col-start-3 lg:col-span-2 lg:row-start-1",
   },
   {
     src: "/images/water7.webp",
     alt: "Cases of water delivered to a customer door with a dolly",
     cap: "Doorstep delivery, no heavy lifting",
-    span: "std",
+    cls: "sm:col-span-2 h-72 sm:h-80 lg:col-start-2 lg:col-span-2 lg:row-start-2",
   },
   {
     src: "/images/water5.webp",
     alt: "Drop2Door warehouse stock of Eska and Kirkland cases",
     cap: "Stocked deep for big orders",
-    span: "wide",
+    cls: "sm:col-span-2 h-72 sm:h-80 lg:col-start-4 lg:row-start-2",
   },
   {
     src: "/images/brand-card.webp",
     alt: "Drop2Door Water Delivery Services brand card with red phoenix logo",
     cap: "",
-    span: "wide",
+    cls: "sm:col-span-2 h-72 sm:h-80 lg:col-start-3 lg:col-span-2 lg:row-start-3",
   },
 ];
 

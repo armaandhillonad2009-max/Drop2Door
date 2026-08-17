@@ -5,6 +5,7 @@ import PageHeader from "@/components/PageHeader";
 import CTABand from "@/components/CTABand";
 import { Kicker, Reveal } from "@/components/Motion";
 import { useQuote } from "@/context/QuoteContext";
+import Tilt from "@/components/Tilt";
 
 export default function Water() {
   const { openQuote } = useQuote();
@@ -24,6 +25,7 @@ export default function Water() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {PRODUCTS.map((p, i) => (
               <Reveal key={p.name} delay={0.08 * i}>
+                <Tilt>
                 <article
                   className={`glow-card group flex h-full flex-col overflow-hidden rounded-3xl border border-cyan-400/12 bg-[#081120] transition-all duration-500 hover:rotate-0 hover:shadow-[0_24px_60px_rgba(2,132,199,0.22)] ${
                     ["md:-rotate-2", "md:mt-10 md:rotate-1", "md:-rotate-1"][i % 3]
@@ -59,6 +61,7 @@ export default function Water() {
                     </button>
                   </div>
                 </article>
+                </Tilt>
               </Reveal>
             ))}
           </div>

@@ -40,6 +40,13 @@ WhatsApp CTAs with context pre-filled messages; working quote modal + bulk form;
 - Added "Other water companies are available on request" note under product grids on Home and Water
 - Gallery: added `delivery-stack.webp` (stacked cases photo), now 7 items
 
+## Iteration 2026-08-17 (v4, owner-requested changes)
+- Glacier loop smoothed: video is now a forward+reverse boomerang (11.75s) so the loop point is seamless; regenerated glacier.mp4/webm and mobile crops (original kept as glacier-orig.mp4)
+- CTABand: glacier clip fades in behind the final call-to-action (whileInView, opacity 0.35, mobile crop sources), page now opens and closes on ice
+- Product cards (Home + Water): new Tilt component (framer-motion springs, perspective 900) makes each case lean toward the cursor
+- Gallery: explicit lg grid placement (4x3 mosaic, no gaps), clean sm stacking; fixed swapped captions/alts between van-interior and sidewalk photos
+- Reviews: redesigned card, centered layout (stars, quote, author, divider, dots + Google link), removed decorative quote icon that overlapped the stars
+
 ## Verified
 - curl POST /api/quote and /api/bulk-quote: success + email sent
 - Screenshots: hero, manifesto, modal, checker both verdicts, reviews, mobile home + events
