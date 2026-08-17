@@ -30,13 +30,13 @@ export default function Water() {
                   }`}
                   data-testid={`product-card-${p.name.toLowerCase().replace(/[^a-z]+/g, "-")}`}
                 >
-                  <div className="relative aspect-[3/4] overflow-hidden bg-[#04091a]">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-[radial-gradient(ellipse_at_50%_62%,#0e2a47_0%,#04091a_72%)]">
+                    <div className="absolute left-1/2 top-[58%] h-44 w-44 -translate-x-1/2 rounded-full bg-cyan-400/20 blur-3xl transition-all duration-700 group-hover:bg-cyan-400/35" aria-hidden="true" />
                     <img
                       src={p.image}
                       alt={p.alt}
                       loading="lazy"
-                      style={{ objectPosition: p.pos }}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
+                      className="absolute inset-0 m-auto max-h-[64%] max-w-[86%] object-contain drop-shadow-[0_28px_44px_rgba(2,132,199,0.35)] transition-transform duration-700 group-hover:scale-[1.06]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#081120] via-transparent to-transparent" aria-hidden="true" />
                   </div>
@@ -62,6 +62,13 @@ export default function Water() {
               </Reveal>
             ))}
           </div>
+          <Reveal delay={0.25}>
+            <p className="mt-10 text-center text-sm text-slate-400" data-testid="water-more-note">
+              Looking for another brand?{" "}
+              <span className="font-semibold text-cyan-300">Other water companies are available on request.</span>{" "}
+              Contact us for exact pricing and availability.
+            </p>
+          </Reveal>
         </div>
       </section>
 

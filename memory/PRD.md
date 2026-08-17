@@ -33,6 +33,13 @@ WhatsApp CTAs with context pre-filled messages; working quote modal + bulk form;
 - Manifesto 04 image swapped to sidewalk.webp; Water page header bg swapped to panel-glacier.webp
 - Deleted bottle-kirkland/eska/compliments crop files
 
+## Iteration 2026-08-17 (v3, owner-requested changes)
+- Hero: removed the 3-bottle frame; hero is now centered cinematic type over the glacier video
+- Glacier video now loops forever (no end fade-out; scroll fade-away kept); added portrait-cropped `glacier-mobile.mp4/.webm` served via source media query under 640px
+- Product cards (Home brands + Water): real case photos with white backgrounds removed programmatically (`product-kirkland/eska/compliments.webp`, transparent, flood-fill cutout via /app/scripts/cutout_products.py), shown on dark radial ice stages with glow, tilted frames kept
+- Added "Other water companies are available on request" note under product grids on Home and Water
+- Gallery: added `delivery-stack.webp` (stacked cases photo), now 7 items
+
 ## Verified
 - curl POST /api/quote and /api/bulk-quote: success + email sent
 - Screenshots: hero, manifesto, modal, checker both verdicts, reviews, mobile home + events

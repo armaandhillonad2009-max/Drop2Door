@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ChevronDown, Clock, MapPin, Package } from "lucide-react";
@@ -13,10 +13,8 @@ import CTABand from "@/components/CTABand";
 function Hero() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const yImg = useTransform(scrollYProgress, [0, 1], [0, 130]);
-  const yText = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const yText = useTransform(scrollYProgress, [0, 1], [0, -60]);
   const vidFade = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
-  const [videoOn, setVideoOn] = useState(true);
   const reducedMotion =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -32,15 +30,17 @@ function Hero() {
           <motion.video
             autoPlay
             muted
+            loop
             playsInline
             preload="auto"
-            onEnded={() => setVideoOn(false)}
             initial={{ opacity: 0 }}
-            animate={{ opacity: videoOn ? 0.5 : 0 }}
+            animate={{ opacity: 0.5 }}
             transition={{ duration: 2.6, ease: "easeOut" }}
             className="h-full w-full object-cover brightness-[0.75] saturate-[1.15]"
             data-testid="hero-glacier-video"
           >
+            <source src="/videos/glacier-mobile.mp4" type="video/mp4" media="(max-width: 640px)" />
+            <source src="/videos/glacier-mobile.webm" type="video/webm" media="(max-width: 640px)" />
             <source src="/videos/glacier.mp4" type="video/mp4" />
             <source src="/videos/glacier.webm" type="video/webm" />
           </motion.video>
@@ -53,12 +53,12 @@ function Hero() {
         <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#030712] to-transparent" />
       </div>
 
-      <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-14 px-5 pb-24 pt-32 sm:px-8 lg:grid-cols-12 lg:gap-8 lg:pt-24">
-        <motion.div style={{ y: yText }} className="lg:col-span-7">
+      <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center px-5 pb-24 pt-36 text-center sm:px-8 lg:pt-40">
+        <motion.div style={{ y: yText }} className="flex flex-col items-center">
           <Reveal y={16}>
             <Kicker>Greater Toronto Area · Open 24 hours</Kicker>
           </Reveal>
-          <h1 className="font-display mt-6 text-[13vw] font-extrabold leading-[0.94] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-[5.2rem]">
+          <h1 className="font-display mt-6 text-[13vw] font-extrabold leading-[0.94] tracking-tight text-white sm:text-7xl lg:text-8xl xl:text-[6.8rem]">
             <MaskedLine delay={0.1}>PURE WATER.</MaskedLine>
             <MaskedLine delay={0.22}>
               <span className="text-gradient-ice">DELIVERED TO</span>
@@ -68,13 +68,13 @@ function Hero() {
             </MaskedLine>
           </h1>
           <Reveal delay={0.5}>
-            <p className="mt-7 max-w-xl text-base leading-relaxed text-slate-400 sm:text-lg">
+            <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">
               Bottled water delivery across the GTA for homes, businesses, restaurants, hotels,
               events and more. Spring, distilled and sparkling, from brands you already trust.
             </p>
           </Reveal>
           <Reveal delay={0.62}>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <a
                 href={waChat(WA_MESSAGES.general)}
                 target="_blank"
@@ -95,7 +95,7 @@ function Hero() {
             </div>
           </Reveal>
           <Reveal delay={0.74}>
-            <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 text-xs text-slate-400">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-xs text-slate-400">
               <span className="flex items-center gap-2">
                 <Package className="h-4 w-4 text-cyan-400" /> Min. 10 packs/cases
               </span>
@@ -105,38 +105,6 @@ function Hero() {
               <span className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-cyan-400" /> Serving since {SITE.since}
               </span>
-            </div>
-          </Reveal>
-        </motion.div>
-
-        <motion.div style={{ y: yImg }} className="relative lg:col-span-5">
-          <Reveal delay={0.45} y={40}>
-            <div className="relative mx-auto max-w-md lg:max-w-none">
-              <div
-                className="absolute -inset-3 -rotate-3 rounded-[2.4rem] border border-cyan-400/15"
-                aria-hidden="true"
-              />
-              <div
-                className="absolute inset-0 scale-90 rounded-[2.5rem] bg-cyan-400/20 blur-[70px]"
-                aria-hidden="true"
-              />
-              <div className="glow-card animate-float relative rotate-2 overflow-hidden rounded-[2rem] border border-cyan-400/20 transition-transform duration-700 hover:rotate-0">
-                <img
-                  src="/images/bottles.webp"
-                  alt="Ice cold Kirkland, Eska and Compliments water bottles delivered by Drop2Door"
-                  className="h-[420px] w-full object-cover sm:h-[500px] lg:h-[560px]"
-                  data-testid="hero-bottles-image"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/60 via-transparent to-transparent" />
-                <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between">
-                  <span className="font-mono2 text-[10px] uppercase tracking-[0.24em] text-cyan-200/90">
-                    Kirkland · Eska · Compliments
-                  </span>
-                  <span className="rounded-full border border-red-500/40 bg-red-500/15 px-3 py-1 font-mono2 text-[9px] uppercase tracking-[0.2em] text-red-300">
-                    Ice cold
-                  </span>
-                </div>
-              </div>
             </div>
           </Reveal>
         </motion.div>
@@ -189,13 +157,13 @@ function Brands() {
                   ["sm:-rotate-2", "sm:translate-y-6 sm:rotate-1", "sm:-rotate-1"][i % 3]
                 }`}
               >
-                <div className="relative aspect-[4/5] overflow-hidden bg-[#04091a]">
+                <div className="relative aspect-[4/5] overflow-hidden bg-[radial-gradient(ellipse_at_50%_66%,#0e2a47_0%,#04091a_72%)]">
+                  <div className="absolute left-1/2 top-[60%] h-40 w-40 -translate-x-1/2 rounded-full bg-cyan-400/20 blur-3xl transition-all duration-700 group-hover:bg-cyan-400/35" aria-hidden="true" />
                   <img
                     src={p.image}
                     alt={p.alt}
                     loading="lazy"
-                    style={{ objectPosition: p.pos }}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
+                    className="absolute inset-0 m-auto max-h-[62%] max-w-[86%] object-contain drop-shadow-[0_28px_44px_rgba(2,132,199,0.35)] transition-transform duration-700 group-hover:scale-[1.06]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#02050d] via-[#02050d]/25 to-transparent" aria-hidden="true" />
                   <span className="absolute right-4 top-4 rounded-full border border-cyan-400/30 bg-[#030712]/70 px-3 py-1 font-mono2 text-[9px] uppercase tracking-[0.14em] text-cyan-300 backdrop-blur-sm">
@@ -210,6 +178,13 @@ function Brands() {
             </Reveal>
           ))}
         </div>
+        <Reveal delay={0.25}>
+          <p className="mt-14 text-center text-sm text-slate-400" data-testid="brands-more-note">
+            Looking for another brand?{" "}
+            <span className="font-semibold text-cyan-300">Other water companies are available on request.</span>{" "}
+            Message us on WhatsApp and we will confirm availability.
+          </p>
+        </Reveal>
       </div>
     </section>
   );
