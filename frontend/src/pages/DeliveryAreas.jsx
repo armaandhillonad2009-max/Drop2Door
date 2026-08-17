@@ -11,7 +11,6 @@ export default function DeliveryAreas() {
         kicker="Delivery areas"
         lines={["Where the", "water goes."]}
         sub="We deliver across Brampton, Mississauga, Toronto, Caledon, Malton, Milton, Peel Region and the wider Greater Toronto Area. Check your postal code or city below."
-        image="/images/vehicle.webp"
         title="Delivery Areas | Water Delivery Brampton, Mississauga, Toronto & GTA"
       />
 

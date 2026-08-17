@@ -35,7 +35,6 @@ export default function About() {
         kicker="About Drop2Door"
         lines={["Built on a", "simple idea."]}
         sub="Getting enough bottled water should not require a truck, a strong back and three store trips a week. So we made it our job instead."
-        image="/images/panel-eska.webp"
         title="About | Drop2Door Water Delivery Services"
       />
 

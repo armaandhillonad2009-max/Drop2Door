@@ -224,6 +224,55 @@ export default function QuoteModal() {
                     <label className={LABEL_CLS} htmlFor="q-msg">Message / notes</label>
                     <textarea id="q-msg" data-testid="quote-message-input" rows={3} className={`${FIELD_CLS} resize-none`} value={form.message} onChange={set("message")} placeholder="Anything we should know? Access instructions, timing, questions..." />
                   </div>
+                  {(form.product || form.quantity || form.preferred_date) && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4 }}
+                      className="rounded-2xl border border-cyan-400/20 bg-cyan-400/5 p-5 sm:col-span-2"
+                      data-testid="quote-order-summary"
+                    >
+                      <p className="font-mono2 text-[10px] uppercase tracking-[0.24em] text-cyan-300/80">
+                        Your request so far
+                      </p>
+                      <div className="mt-3 grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                        {form.product && (
+                          <>
+                            <span className="text-slate-500">Product</span>
+                            <span className="text-right font-semibold text-white">{form.product}</span>
+                          </>
+                        )}
+                        {form.quantity && (
+                          <>
+                            <span className="text-slate-500">Quantity</span>
+                            <span className="text-right font-semibold text-white">
+                              {form.quantity} packs/cases
+                            </span>
+                          </>
+                        )}
+                        <span className="text-slate-500">Customer</span>
+                        <span className="text-right font-semibold text-white">{form.customer_type}</span>
+                        {(form.preferred_date || form.preferred_time) && (
+                          <>
+                            <span className="text-slate-500">Preferred</span>
+                            <span className="text-right font-semibold text-white">
+                              {[form.preferred_date, form.preferred_time].filter(Boolean).join(" · ")}
+                            </span>
+                          </>
+                        )}
+                        <span className="text-slate-500">Pricing</span>
+                        <span className="text-right font-semibold text-cyan-300">Quote-based</span>
+                      </div>
+                      {Number(form.quantity) > 0 && Number(form.quantity) < 10 && (
+                        <p className="mt-3 text-[11px] font-semibold text-red-300" data-testid="quote-summary-min-warning">
+                          Minimum delivery order is 10 packs/cases.
+                        </p>
+                      )}
+                      <p className="mt-2 text-[11px] leading-relaxed text-slate-500">
+                        Exact pricing is confirmed with you directly, based on location and order size.
+                      </p>
+                    </motion.div>
+                  )}
                   <div className="sm:col-span-2">
                     <button
                       type="submit"

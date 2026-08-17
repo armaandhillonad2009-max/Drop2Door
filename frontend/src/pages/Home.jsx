@@ -7,6 +7,7 @@ import { Kicker, MaskedLine, Reveal } from "@/components/Motion";
 import { WhatsAppIcon } from "@/components/icons";
 import Marquee from "@/components/Marquee";
 import Tilt from "@/components/Tilt";
+import FaintGlacier from "@/components/FaintGlacier";
 import AreaChecker from "@/components/AreaChecker";
 import Reviews from "@/components/Reviews";
 import CTABand from "@/components/CTABand";
@@ -269,7 +270,8 @@ function FilmStrip() {
 
 function CheckerSection() {
   return (
-    <section id="area-checker" className="scroll-mt-24 bg-[#02050d] py-24 sm:py-32" data-testid="home-checker-section">
+    <section id="area-checker" className="relative scroll-mt-24 overflow-hidden bg-[#02050d] py-24 sm:py-32" data-testid="home-checker-section">
+      <FaintGlacier opacity={0.18} testid="checker-glacier" />
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
         <Reveal>
           <Kicker>Delivery zone</Kicker>

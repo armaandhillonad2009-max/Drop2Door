@@ -47,6 +47,12 @@ WhatsApp CTAs with context pre-filled messages; working quote modal + bulk form;
 - Gallery: explicit lg grid placement (4x3 mosaic, no gaps), clean sm stacking; fixed swapped captions/alts between van-interior and sidewalk photos
 - Reviews: redesigned card, centered layout (stars, quote, author, divider, dots + Google link), removed decorative quote icon that overlapped the stars
 
+## Iteration 2026-08-17 (v5, owner-requested changes)
+- QuoteModal: live order summary bubble ("Your request so far") appears as customer picks product/quantity/date, shows quote-based pricing note and a red warning if quantity is under 10
+- New FaintGlacier component (shared faint looping glacier video background, reduced-motion aware, mobile crop sources)
+- PageHeader: removed faint baked-text image backgrounds on all 6 subpages; headers now use FaintGlacier (no more faint text looking like bad editing)
+- FaintGlacier also added behind Reviews and the home delivery-area checker, extending the ice motion between chapters
+
 ## Verified
 - curl POST /api/quote and /api/bulk-quote: success + email sent
 - Screenshots: hero, manifesto, modal, checker both verdicts, reviews, mobile home + events

@@ -10,7 +10,6 @@ export default function Gallery() {
         kicker="Gallery"
         lines={["Real water.", "Real deliveries."]}
         sub="No stock photography here. This is our stock, our vehicles and our customers' doorsteps across the GTA."
-        image="/images/panel-glacier.webp"
         title="Gallery | Drop2Door Water Delivery Services"
       />
 

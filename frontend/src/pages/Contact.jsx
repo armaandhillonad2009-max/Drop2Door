@@ -43,7 +43,6 @@ export default function Contact() {
         kicker="Contact"
         lines={["Talk to", "a real human."]}
         sub="Questions, quotes, scheduling or big orders. The fastest way to reach us is WhatsApp, and we answer around the clock."
-        image="/images/bottles.webp"
         title="Contact | Drop2Door Water Delivery Services"
       />
 

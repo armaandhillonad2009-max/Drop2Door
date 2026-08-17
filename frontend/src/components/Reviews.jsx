@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Star } from "lucide-react";
 import { REVIEWS, SITE } from "@/data/site";
 import { Kicker, Reveal } from "@/components/Motion";
+import FaintGlacier from "@/components/FaintGlacier";
 
 export default function Reviews() {
   const [index, setIndex] = useState(0);
@@ -16,6 +17,7 @@ export default function Reviews() {
 
   return (
     <section className="relative overflow-hidden bg-[#030712] py-24 sm:py-32" data-testid="reviews-section">
+      <FaintGlacier opacity={0.2} testid="reviews-glacier" />
       <div
         className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[140px]"
         aria-hidden="true"

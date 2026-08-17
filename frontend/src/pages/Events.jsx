@@ -181,7 +181,6 @@ export default function Events() {
         kicker="Events & bulk orders"
         lines={["Big plans?", "We bring the water."]}
         sub="Weddings, parties, corporate events, restaurants, hotels, offices and large gatherings. Drop2Door handles large-volume orders with staff, vehicles and scheduled delivery, so water is one less thing on your list."
-        image="/images/water5.webp"
         title="Events & Bulk Water Delivery | Drop2Door GTA"
       />
 

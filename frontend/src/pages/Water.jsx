@@ -16,7 +16,6 @@ export default function Water() {
         kicker="Water we deliver"
         lines={["Trusted brands.", "Served ice cold."]}
         sub="Spring, distilled and sparkling water from Kirkland, Eska and Compliments. Pricing is quote-based and depends on your location and order size, so message us for exact numbers and current availability."
-        image="/images/panel-glacier.webp"
         title="Water We Deliver | Drop2Door Water Delivery GTA"
       />
 
