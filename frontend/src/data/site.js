@@ -90,13 +90,33 @@ export const REVIEWS = [
     stars: 5,
   },
   {
+    name: "Gursewak Singh",
+    text: "Absolutely fantastic service! They are always punctual, courteous, and very professional. The delivery process is seamless, and the staff goes above and beyond to make sure we never run out of fresh, clean water. Truly a 5-star experience every single time!",
+    stars: 5,
+  },
+  {
+    name: "Jasmeet Kaur",
+    text: "I'm really happy with this delivery service. They provide proper door-step delivery, and the delivery person who dropped the water was very helpful and polite. I have a small baby, and he really helped me a lot by carrying the bottles inside and placing them where I needed, it made my day much easier. The service saves a lot of time compared to going and buying water myself, and the charges are also very good and reasonable. Highly recommended for families, especially those with small kids or elderly people at home. Will definitely continue using this service.",
+    stars: 5,
+  },
+  {
     name: "Kushal Sharma",
     text: "Excellent service and more convenient.",
     stars: 5,
   },
   {
+    name: "Harvardaan Sran",
+    text: "Excellent water delivery service! The ordering process was easy, the delivery was prompt, and the driver was friendly and professional. The water arrived in perfect condition, and the convenience of having it delivered right to my door has been wonderful. I highly recommend this service to anyone looking for reliable, high-quality water delivery.",
+    stars: 5,
+  },
+  {
     name: "Ajay Johal",
     text: "Great service great people",
+    stars: 5,
+  },
+  {
+    name: "Armaan",
+    text: "Great service from start to finish. Delivery was on time, the water was exactly what I ordered, and the whole process was really easy. They also offer great prices and have friendly customer service. Will definitely be ordering again.",
     stars: 5,
   },
   {

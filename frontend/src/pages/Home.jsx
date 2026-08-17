@@ -128,7 +128,7 @@ function Hero() {
 
 function Brands() {
   return (
-    <section className="relative bg-[#030712] py-24 sm:py-32" data-testid="brands-section">
+    <section className="relative bg-[#030712] py-20 sm:py-24" data-testid="brands-section">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <Reveal>
@@ -196,7 +196,7 @@ function Brands() {
 
 function Manifesto() {
   return (
-    <section className="relative bg-[#02050d] py-24 sm:py-32" data-testid="manifesto-section">
+    <section className="relative bg-[#02050d] py-20 sm:py-24" data-testid="manifesto-section">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
           <Kicker>Why Drop2Door</Kicker>
@@ -270,7 +270,7 @@ function FilmStrip() {
 
 function CheckerSection() {
   return (
-    <section id="area-checker" className="relative scroll-mt-24 overflow-hidden bg-[#02050d] py-24 sm:py-32" data-testid="home-checker-section">
+    <section id="area-checker" className="relative scroll-mt-24 overflow-hidden bg-[#02050d] py-20 sm:py-24" data-testid="home-checker-section">
       <FaintGlacier opacity={0.18} testid="checker-glacier" />
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
         <Reveal>
@@ -308,7 +308,7 @@ export default function Home() {
       <FilmStrip />
       <CheckerSection />
       <Reviews />
-      <CTABand />
+      <CTABand showGlacier />
     </main>
   );
 }

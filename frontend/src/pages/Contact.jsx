@@ -43,10 +43,11 @@ export default function Contact() {
         kicker="Contact"
         lines={["Talk to", "a real human."]}
         sub="Questions, quotes, scheduling or big orders. The fastest way to reach us is WhatsApp, and we answer around the clock."
+        image="/images/bottles.webp"
         title="Contact | Drop2Door Water Delivery Services"
       />
 
-      <section className="bg-[#030712] py-20 sm:py-28" data-testid="contact-section">
+      <section className="bg-[#030712] py-16 sm:py-24" data-testid="contact-section">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 sm:px-8 lg:grid-cols-2">
           <div className="space-y-4">
             {CONTACT_ROWS.map((r, i) => {

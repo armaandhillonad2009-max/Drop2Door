@@ -167,6 +167,12 @@ html.lenis body {
 .animate-marquee {
     animation: marquee-x 48s linear infinite;
 }
+.animate-marquee-slow {
+    animation: marquee-x 110s linear infinite;
+}
+.review-belt:hover .animate-marquee-slow {
+    animation-play-state: paused;
+}
 
 @keyframes float-y {
     0%,
@@ -213,6 +219,7 @@ html.lenis body {
 
 @media (prefers-reduced-motion: reduce) {
     .animate-marquee,
+    .animate-marquee-slow,
     .animate-float,
     .animate-ping-ring,
     .animate-mist {

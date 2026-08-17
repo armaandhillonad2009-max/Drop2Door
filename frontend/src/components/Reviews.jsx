@@ -1,22 +1,11 @@
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Star } from "lucide-react";
 import { REVIEWS, SITE } from "@/data/site";
 import { Kicker, Reveal } from "@/components/Motion";
 import FaintGlacier from "@/components/FaintGlacier";
 
 export default function Reviews() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const t = setInterval(() => setIndex((i) => (i + 1) % REVIEWS.length), 5000);
-    return () => clearInterval(t);
-  }, []);
-
-  const review = REVIEWS[index];
-
   return (
-    <section className="relative overflow-hidden bg-[#030712] py-24 sm:py-32" data-testid="reviews-section">
+    <section className="relative overflow-hidden bg-[#030712] py-20 sm:py-24" data-testid="reviews-section">
       <FaintGlacier opacity={0.2} testid="reviews-glacier" />
       <div
         className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[140px]"
@@ -28,70 +17,52 @@ export default function Reviews() {
           <h2 className="font-display mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             What Our <span className="text-gradient-ice">Customers Say</span>
           </h2>
-        </Reveal>
-
-        <Reveal delay={0.1} className="mt-14">
-          <div className="glow-card relative overflow-hidden rounded-3xl border border-cyan-400/12 bg-[#081120]/80 p-8 sm:p-14">
-            <div className="relative min-h-[230px] sm:min-h-[210px]">
-              <AnimatePresence mode="wait">
-                <motion.figure
-                  key={index}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -24 }}
-                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                  data-testid="review-card"
-                  className="flex flex-col items-center text-center"
-                >
-                  <div className="flex items-center justify-center gap-1.5" aria-label={`${review.stars} star review`}>
-                    {Array.from({ length: review.stars }).map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
-                  <blockquote className="font-display mx-auto mt-6 max-w-2xl text-2xl font-semibold leading-snug text-white sm:text-3xl">
-                    "{review.text}"
-                  </blockquote>
-                  <figcaption className="mt-7 flex items-center gap-3">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-cyan-400/15 font-display text-sm font-bold text-cyan-300">
-                      {review.name.charAt(0)}
-                    </span>
-                    <span className="text-left">
-                      <span className="block text-sm font-semibold text-white">{review.name}</span>
-                      <span className="block text-xs text-slate-500">Google review</span>
-                    </span>
-                  </figcaption>
-                </motion.figure>
-              </AnimatePresence>
-            </div>
-
-            <div className="mt-9 flex items-center justify-between border-t border-cyan-400/10 pt-6">
-              <div className="flex gap-2">
-                {REVIEWS.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setIndex(i)}
-                    aria-label={`Show review ${i + 1}`}
-                    data-testid={`review-dot-${i}`}
-                    className={`h-1.5 rounded-full transition-all duration-500 ${
-                      i === index ? "w-8 bg-cyan-400" : "w-3 bg-slate-700 hover:bg-slate-500"
-                    }`}
-                  />
-                ))}
-              </div>
-              <a
-                href={SITE.googleProfile}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid="reviews-google-link"
-                className="group flex items-center gap-1.5 text-sm font-semibold text-cyan-300 transition hover:text-cyan-200"
-              >
-                See Us on Google
-                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </a>
-            </div>
-          </div>
+          <a
+            href={SITE.googleProfile}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="reviews-google-link"
+            className="group mt-6 inline-flex items-center gap-1.5 rounded-full border border-cyan-400/25 px-5 py-2.5 text-sm font-semibold text-cyan-300 transition hover:border-cyan-300/60 hover:bg-cyan-400/10"
+          >
+            See Us on Google
+            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
         </Reveal>
       </div>
+
+      <Reveal delay={0.12} className="mt-12">
+        <div className="review-belt relative" data-testid="reviews-belt">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 bg-gradient-to-r from-[#030712] to-transparent sm:w-32" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-[#030712] to-transparent sm:w-32" aria-hidden="true" />
+          <div className="animate-marquee-slow flex w-max items-stretch gap-5 px-5">
+            {[...REVIEWS, ...REVIEWS].map((r, i) => (
+              <figure
+                key={i}
+                data-testid={`review-card-${i % REVIEWS.length}`}
+                className="glow-card flex w-[320px] shrink-0 flex-col rounded-3xl border border-cyan-400/12 bg-[#081120]/85 p-6 sm:w-[400px] sm:p-7"
+              >
+                <div className="flex items-center gap-1.5" aria-label={`${r.stars} star review`}>
+                  {Array.from({ length: r.stars }).map((_, s) => (
+                    <Star key={s} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-slate-200">
+                  "{r.text}"
+                </blockquote>
+                <figcaption className="mt-5 flex items-center gap-3 border-t border-cyan-400/10 pt-4">
+                  <span className="font-display flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cyan-400/15 text-xs font-bold text-cyan-300">
+                    {r.name.charAt(0)}
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-white">{r.name}</span>
+                    <span className="block text-[11px] text-slate-500">Google review</span>
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </Reveal>
     </section>
   );
 }

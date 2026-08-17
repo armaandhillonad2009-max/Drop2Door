@@ -181,10 +181,11 @@ export default function Events() {
         kicker="Events & bulk orders"
         lines={["Big plans?", "We bring the water."]}
         sub="Weddings, parties, corporate events, restaurants, hotels, offices and large gatherings. Drop2Door handles large-volume orders with staff, vehicles and scheduled delivery, so water is one less thing on your list."
+        image="/images/water5.webp"
         title="Events & Bulk Water Delivery | Drop2Door GTA"
       />
 
-      <section className="bg-[#030712] py-20 sm:py-28">
+      <section className="bg-[#030712] py-16 sm:py-24">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 sm:px-8 lg:grid-cols-2">
           <div>
             <Reveal>

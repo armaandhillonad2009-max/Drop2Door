@@ -1,15 +1,19 @@
 import { useEffect } from "react";
 import { Kicker, MaskedLine, Reveal } from "@/components/Motion";
-import FaintGlacier from "@/components/FaintGlacier";
 
-export default function PageHeader({ kicker, lines, sub, title }) {
+export default function PageHeader({ kicker, lines, sub, image, title }) {
   useEffect(() => {
     if (title) document.title = title;
   }, [title]);
 
   return (
     <section className="noise relative overflow-hidden bg-[#030712] pb-16 pt-36 sm:pb-20 sm:pt-44">
-      <FaintGlacier opacity={0.35} testid="page-header-glacier" />
+      {image && (
+        <div className="absolute inset-0" aria-hidden="true">
+          <img src={image} alt="" className="h-full w-full object-cover opacity-25" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#030712]/70 via-[#030712]/85 to-[#030712]" />
+        </div>
+      )}
       <div
         className="pointer-events-none absolute -top-32 left-1/3 h-96 w-96 rounded-full bg-cyan-500/10 blur-[130px]"
         aria-hidden="true"

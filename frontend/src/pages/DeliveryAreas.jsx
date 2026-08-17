@@ -11,10 +11,11 @@ export default function DeliveryAreas() {
         kicker="Delivery areas"
         lines={["Where the", "water goes."]}
         sub="We deliver across Brampton, Mississauga, Toronto, Caledon, Malton, Milton, Peel Region and the wider Greater Toronto Area. Check your postal code or city below."
+        image="/images/vehicle.webp"
         title="Delivery Areas | Water Delivery Brampton, Mississauga, Toronto & GTA"
       />
 
-      <section className="bg-[#030712] py-20 sm:py-28">
+      <section className="bg-[#030712] py-16 sm:py-24">
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
           <Reveal>
             <AreaChecker />
@@ -22,7 +23,7 @@ export default function DeliveryAreas() {
         </div>
       </section>
 
-      <section className="border-t border-cyan-400/10 bg-[#02050d] py-20 sm:py-28" data-testid="city-grid-section">
+      <section className="border-t border-cyan-400/10 bg-[#02050d] py-16 sm:py-24" data-testid="city-grid-section">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <Kicker>Regular routes</Kicker>

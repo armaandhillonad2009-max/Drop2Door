@@ -53,6 +53,12 @@ WhatsApp CTAs with context pre-filled messages; working quote modal + bulk form;
 - PageHeader: removed faint baked-text image backgrounds on all 6 subpages; headers now use FaintGlacier (no more faint text looking like bad editing)
 - FaintGlacier also added behind Reviews and the home delivery-area checker, extending the ice motion between chapters
 
+## Iteration 2026-08-17 (v6, owner-requested changes)
+- Reviews: replaced single rotating card with an infinite scrolling belt of review cards (animate-marquee-slow, 110s, pauses on hover, edge fade masks); added 4 new genuine Google reviews (Gursewak Singh, Armaan, Harvardaan Sran, Jasmeet Kaur), 8 total; Google link is now a centered pill under the heading
+- QuoteModal: plus/minus quantity stepper around the input (mobile-friendly taps)
+- Spacing: reduced section padding ~20% site-wide (py-24/sm:py-32 to py-20/sm:py-24, py-20/sm:py-28 to py-16/sm:py-24)
+- Glacier video now only on the homepage (hero, checker, reviews belt, CTA band via showGlacier prop on CTABand); subpage headers went back to real photos but ONLY text-free ones: Water=hero-strip, DeliveryAreas=vehicle, Events=water5, Gallery=water7, About=delivery-stack, Contact=bottles
+
 ## Verified
 - curl POST /api/quote and /api/bulk-quote: success + email sent
 - Screenshots: hero, manifesto, modal, checker both verdicts, reviews, mobile home + events

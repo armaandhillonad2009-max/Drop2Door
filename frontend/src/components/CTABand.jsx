@@ -9,14 +9,15 @@ export default function CTABand({
   title = "Cold water. Zero heavy lifting.",
   sub = "Message us on WhatsApp for a fast quote, or send a delivery request and we will contact you to confirm details and pricing.",
   waMessage = WA_MESSAGES.general,
+  showGlacier = false,
 }) {
   const { openQuote } = useQuote();
   const reducedMotion =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   return (
-    <section className="relative overflow-hidden bg-[#030712] py-24 sm:py-32" data-testid="cta-band">
-      {!reducedMotion && (
+    <section className="relative overflow-hidden bg-[#030712] py-20 sm:py-24" data-testid="cta-band">
+      {showGlacier && !reducedMotion && (
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 0.35 }}

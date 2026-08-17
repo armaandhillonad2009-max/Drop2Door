@@ -35,10 +35,11 @@ export default function About() {
         kicker="About Drop2Door"
         lines={["Built on a", "simple idea."]}
         sub="Getting enough bottled water should not require a truck, a strong back and three store trips a week. So we made it our job instead."
+        image="/images/delivery-stack.webp"
         title="About | Drop2Door Water Delivery Services"
       />
 
-      <section className="bg-[#030712] py-20 sm:py-28" data-testid="about-story">
+      <section className="bg-[#030712] py-16 sm:py-24" data-testid="about-story">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-14 px-5 sm:px-8 lg:grid-cols-2">
           <div>
             <Reveal>
@@ -103,7 +104,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="border-t border-cyan-400/10 bg-[#02050d] py-20 sm:py-28">
+      <section className="border-t border-cyan-400/10 bg-[#02050d] py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <Kicker>How we work</Kicker>

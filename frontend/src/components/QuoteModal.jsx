@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
-import { CheckCircle2, Loader2, X } from "lucide-react";
+import { CheckCircle2, Loader2, Minus, Plus, X } from "lucide-react";
 import { toast } from "sonner";
 import { useQuote } from "@/context/QuoteContext";
 import { FIELD_CLS, LABEL_CLS, PRODUCT_OPTIONS, SITE, TIME_SLOTS, WA_MESSAGES, waChat } from "@/data/site";
@@ -52,6 +52,12 @@ export default function QuoteModal() {
   }, [open]);
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const bumpQty = (d) =>
+    setForm((f) => {
+      const next = Math.max(1, (parseInt(f.quantity, 10) || 0) + d);
+      return { ...f, quantity: String(next) };
+    });
 
   const waSummary = () => {
     const parts = [
@@ -203,7 +209,36 @@ export default function QuoteModal() {
                   </div>
                   <div>
                     <label className={LABEL_CLS} htmlFor="q-qty">Quantity (min. 10 cases)</label>
-                    <input id="q-qty" data-testid="quote-quantity-input" type="number" min="10" className={FIELD_CLS} value={form.quantity} onChange={set("quantity")} placeholder="10" />
+                    <div className="relative">
+                      <button
+                        type="button"
+                        aria-label="Decrease quantity"
+                        data-testid="quote-qty-minus"
+                        onClick={() => bumpQty(-1)}
+                        className="absolute left-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-cyan-400/25 text-cyan-300 transition hover:bg-cyan-400/15"
+                      >
+                        <Minus className="h-3.5 w-3.5" />
+                      </button>
+                      <input
+                        id="q-qty"
+                        data-testid="quote-quantity-input"
+                        type="number"
+                        min="10"
+                        className={`${FIELD_CLS} px-11 text-center [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`}
+                        value={form.quantity}
+                        onChange={set("quantity")}
+                        placeholder="10"
+                      />
+                      <button
+                        type="button"
+                        aria-label="Increase quantity"
+                        data-testid="quote-qty-plus"
+                        onClick={() => bumpQty(1)}
+                        className="absolute right-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-cyan-400/25 text-cyan-300 transition hover:bg-cyan-400/15"
+                      >
+                        <Plus className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
