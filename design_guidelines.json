@@ -1,0 +1,103 @@
+{
+  "project_name": "Drop2Door Water Delivery Services",
+  "archetype": "LUXURY & PERFORMANCE PRO (Glacier Icy Dark Theme)",
+  "target_audience": "Residential homes, corporate offices, event managers, and commercial spaces across Greater Toronto Area (GTA), Canada",
+  "brand_identity": {
+    "concept": "Dark + refreshing + cold + premium",
+    "primary_color": "#091322",
+    "secondary_color": "#030712",
+    "accent_glow": "#38BDF8",
+    "brand_red": "#EF4444",
+    "text_primary": "#F8FAFC",
+    "text_muted": "#94A3B8",
+    "border_subtle": "rgba(56, 189, 248, 0.12)",
+    "glass_bg": "rgba(9, 19, 34, 0.75)",
+    "phone": "+1 (647) 375-3572",
+    "whatsapp_link": "https://wa.me/16473753572"
+  },
+  "typography": {
+    "heading_font": "Outfit, sans-serif (Display/Bold, tracking-tight)",
+    "body_font": "Plus Jakarta Sans, sans-serif (Regular/Medium)",
+    "mono_accent": "JetBrains Mono, monospace (For labels, coordinates, batch IDs, postal tags)",
+    "google_fonts_import": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap",
+    "scale": {
+      "h1_hero": "text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none",
+      "h2_section": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight",
+      "h3_subsection": "text-xl sm:text-2xl font-semibold tracking-tight",
+      "h4_card": "text-lg sm:text-xl font-semibold",
+      "body": "text-base leading-relaxed text-slate-300",
+      "caption": "text-xs uppercase tracking-[0.2em] font-mono text-cyan-400"
+    }
+  },
+  "colors": {
+    "background_main": "#030712",
+    "surface_dark": "#091322",
+    "surface_card": "#0F172A",
+    "surface_card_hover": "#1E293B",
+    "accent_cyan": "#38BDF8",
+    "accent_blue": "#0284C7",
+    "accent_red": "#EF4444",
+    "border_subtle": "rgba(56, 189, 248, 0.15)",
+    "glass_overlay": "rgba(3, 7, 18, 0.8)"
+  },
+  "design_assets": {
+    "higgsfield_hero_dark_icy": "https://customer-assets-lxgj4vgw.emergentagent.net/job_16a30633-1665-46e9-8d13-a611e4f36f4f/artifacts/bi5w3c2h_ChatGPT%20Image%20Aug%2017%2C%202026%2C%2012_09_18%20PM.png",
+    "higgsfield_secondary_water_drops": "https://customer-assets-lxgj4vgw.emergentagent.net/job_16a30633-1665-46e9-8d13-a611e4f36f4f/artifacts/b0lcizvq_ChatGPT%20Image%20Aug%2017%2C%202026%2C%2012_12_52%20PM.png",
+    "water5_real_warehouse_stock": "https://customer-assets-lxgj4vgw.emergentagent.net/job_16a30633-1665-46e9-8d13-a611e4f36f4f/artifacts/jhxe5vtq_water5.webp",
+    "water7_real_hallway_dolly_delivery": "https://customer-assets-lxgj4vgw.emergentagent.net/job_16a30633-1665-46e9-8d13-a611e4f36f4f/artifacts/xabez7i0_water7.webp",
+    "water8_vehicle_loaded_van": "https://customer-assets-lxgj4vgw.emergentagent.net/job_16a30633-1665-46e9-8d13-a611e4f36f4f/artifacts/7z68tsig_water8%20vhicle.webp",
+    "toronto_skyline_ice": "https://images.unsplash.com/photo-1599685780334-c56442ac7568?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxUb3JvbnRvJTIwc2t5bGluZSUyMG1vcm5pbmclMjBpY2UlMjBibHVlfGVufDB8fHx8MTc4Njk4ODI0Nnww&ixlib=rb-4.1.0&q=85"
+  },
+  "layout_and_bento": {
+    "spacing_philosophy": "Generous spacing system using p-6 to p-24. Containers with borders MUST have p-6 or p-8 internal padding.",
+    "grid_modes": {
+      "tetris_bento": "grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8",
+      "hero_span": "col-span-full md:col-span-8 row-span-2",
+      "square_span": "col-span-12 md:col-span-4 row-span-1",
+      "tall_span": "col-span-12 md:col-span-4 row-span-2"
+    }
+  },
+  "components_and_features": {
+    "header": {
+      "style": "Sticky crystal glass (backdrop-blur-xl bg-[#091322]/80 border-b border-cyan-500/20 z-50)",
+      "elements": ["Logo with Red Phoenix badge", "Navigation links (Home, Water We Deliver, Delivery Areas, Events & Bulk, Gallery, About, Contact)", "Quote Request CTA button", "WhatsApp quick link"]
+    },
+    "hero_section": {
+      "style": "Large kinetic hero with masked line-by-line reveal, icy dark atmosphere, parallax image overlay",
+      "highlights": ["GTA GTA-wide 24h delivery badge", "Minimum 10 cases requirement callout", "Direct WhatsApp + Quick Quote buttons"]
+    },
+    "postal_checker": {
+      "description": "Interactive Delivery Area Checker supporting GTA postal codes (M1-M9, L1-L7, etc.) and cities (Toronto, Mississauga, Brampton, Vaughan, Markham, Richmond Hill, Oakville, Burlington, Pickering, Ajax, Whitby, Oshawa)",
+      "verdict_ui": "Instant green/cyan status indicator with estimated delivery timeframe (Within 24 Hours) and immediate order CTAs"
+    },
+    "products_section": {
+      "catalog": ["Kirkland Signature Spring Water (35-Pack)", "Eska Natural Spring Water (35-Pack Cases Only)", "Compliments Purified & Distilled Water", "Sparkling & Premium Mineral Water Cases"],
+      "minimum_order": "10 packs / cases per delivery",
+      "pricing": "Quote-based pricing (customized based on quantity and location)"
+    },
+    "manifesto_section": {
+      "format": "Numbered manifesto chapters (01 Pure Springs, 02 Cold Supply Chain, 03 Doorstep Dolly Delivery, 04 GTA Express)",
+      "style": "Asymmetric editorial cards with glowing borders"
+    },
+    "review_section": {
+      "reviews_count": 4,
+      "features": ["Auto-rotating testimonials", "5-star rating visual", "Direct Google Business Profile link"]
+    },
+    "quote_modal_and_forms": {
+      "fields": ["Name", "Phone", "Email", "Address", "Postal Code", "Customer Type (Residential/Business/Event)", "Product Selection", "Quantity (Min 10)", "Preferred Date/Time", "Notes"],
+      "action": "Submits form to backend FastAPI email service + offers seamless 'Continue on WhatsApp' trigger pre-populated with quote details"
+    },
+    "floating_whatsapp": {
+      "visible": "Always visible bottom-right widget with notification ping effect for high-conversion engagement"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Load Google Fonts ('Outfit', 'Plus Jakarta Sans', 'JetBrains Mono') in public/index.html or top of index.css",
+    "Use Lenis smooth scrolling or Framer Motion page scroll transitions",
+    "Strictly use real asset URLs provided in 'design_assets'",
+    "Ensure all interactive elements have data-testid attributes (e.g. data-testid='postal-code-input', data-testid='whatsapp-hero-cta')",
+    "Build backend integration with FastAPI server in /backend/server.py for sending quotes via email",
+    "Include all 8 mandatory pages/sections: Home, Water We Deliver, Delivery Areas, Events & Bulk Orders, Gallery, About, Contact, Privacy/Terms/Delivery Policies",
+    "Follow dark cold icy aesthetic with high APCA visual contrast and responsive mobile drawer navigation"
+  ]
+}
