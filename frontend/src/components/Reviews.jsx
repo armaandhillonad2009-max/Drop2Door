@@ -1,9 +1,38 @@
+import { useEffect, useRef, useState } from "react";
+import { motion, useAnimationFrame, useMotionValue, wrap } from "framer-motion";
 import { ArrowUpRight, Star } from "lucide-react";
 import { REVIEWS, SITE } from "@/data/site";
 import { Kicker, Reveal } from "@/components/Motion";
 import FaintGlacier from "@/components/FaintGlacier";
 
 export default function Reviews() {
+  const x = useMotionValue(0);
+  const trackRef = useRef(null);
+  const [half, setHalf] = useState(0);
+  const dragging = useRef(false);
+  const hovering = useRef(false);
+  const reduced =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  useEffect(() => {
+    const measure = () => trackRef.current && setHalf(trackRef.current.scrollWidth / 2);
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  useAnimationFrame((_, delta) => {
+    if (!half || dragging.current || hovering.current || reduced) return;
+    x.set(wrap(-half, 0, x.get() - delta * 0.045));
+  });
+
+  const handleDrag = () => {
+    if (!half) return;
+    const wrapped = wrap(-half, 0, x.get());
+    if (wrapped !== x.get()) x.set(wrapped);
+  };
+
   return (
     <section className="relative overflow-hidden bg-[#030712] py-20 sm:py-24" data-testid="reviews-section">
       <FaintGlacier opacity={0.2} testid="reviews-glacier" />
@@ -31,10 +60,25 @@ export default function Reviews() {
       </div>
 
       <Reveal delay={0.12} className="mt-12">
-        <div className="review-belt relative" data-testid="reviews-belt">
+        <div
+          className="relative"
+          data-testid="reviews-belt"
+          onMouseEnter={() => (hovering.current = true)}
+          onMouseLeave={() => (hovering.current = false)}
+        >
           <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 bg-gradient-to-r from-[#030712] to-transparent sm:w-32" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-[#030712] to-transparent sm:w-32" aria-hidden="true" />
-          <div className="animate-marquee-slow flex w-max items-stretch gap-5 px-5">
+          <motion.div
+            ref={trackRef}
+            style={{ x }}
+            drag={half ? "x" : false}
+            dragMomentum={false}
+            onDragStart={() => (dragging.current = true)}
+            onDrag={handleDrag}
+            onDragEnd={() => (dragging.current = false)}
+            className="flex w-max cursor-grab select-none items-stretch gap-5 px-5 active:cursor-grabbing"
+            data-testid="reviews-track"
+          >
             {[...REVIEWS, ...REVIEWS].map((r, i) => (
               <figure
                 key={i}
@@ -60,7 +104,10 @@ export default function Reviews() {
                 </figcaption>
               </figure>
             ))}
-          </div>
+          </motion.div>
+          <p className="mt-6 text-center font-mono2 text-[10px] uppercase tracking-[0.24em] text-slate-600">
+            Drag or swipe · pauses on hover
+          </p>
         </div>
       </Reveal>
     </section>

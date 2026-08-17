@@ -59,6 +59,9 @@ WhatsApp CTAs with context pre-filled messages; working quote modal + bulk form;
 - Spacing: reduced section padding ~20% site-wide (py-24/sm:py-32 to py-20/sm:py-24, py-20/sm:py-28 to py-16/sm:py-24)
 - Glacier video now only on the homepage (hero, checker, reviews belt, CTA band via showGlacier prop on CTABand); subpage headers went back to real photos but ONLY text-free ones: Water=hero-strip, DeliveryAreas=vehicle, Events=water5, Gallery=water7, About=delivery-stack, Contact=bottles
 
+## Iteration 2026-08-17 (v7, owner-requested change)
+- Reviews belt is now draggable/swipeable: framer-motion drag="x" with seamless wrap-around, auto-scroll via useAnimationFrame, pauses on hover and while dragging, resumes after. Hint line "Drag or swipe · pauses on hover" added under the belt
+
 ## Verified
 - curl POST /api/quote and /api/bulk-quote: success + email sent
 - Screenshots: hero, manifesto, modal, checker both verdicts, reviews, mobile home + events
