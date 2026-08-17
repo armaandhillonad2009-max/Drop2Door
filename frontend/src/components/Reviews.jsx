@@ -11,6 +11,8 @@ export default function Reviews() {
   const [half, setHalf] = useState(0);
   const dragging = useRef(false);
   const hovering = useRef(false);
+  const resumeAt = useRef(0);
+  const flingV = useRef(0);
   const reduced =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -23,7 +25,15 @@ export default function Reviews() {
   }, []);
 
   useAnimationFrame((_, delta) => {
-    if (!half || dragging.current || hovering.current || reduced) return;
+    if (!half || dragging.current || reduced) return;
+    if (Math.abs(flingV.current) > 6) {
+      x.set(wrap(-half, 0, x.get() + flingV.current * (delta / 1000)));
+      flingV.current *= Math.pow(0.94, delta / 16.7);
+      return;
+    }
+    flingV.current = 0;
+    if (hovering.current) return;
+    if (performance.now() < resumeAt.current) return;
     x.set(wrap(-half, 0, x.get() - delta * 0.045));
   });
 
@@ -73,9 +83,18 @@ export default function Reviews() {
             style={{ x }}
             drag={half ? "x" : false}
             dragMomentum={false}
-            onDragStart={() => (dragging.current = true)}
+            dragConstraints={{ left: -half * 1.5, right: 0 }}
+            dragElastic={0.12}
+            onDragStart={() => {
+              dragging.current = true;
+              flingV.current = 0;
+            }}
             onDrag={handleDrag}
-            onDragEnd={() => (dragging.current = false)}
+            onDragEnd={(e, info) => {
+              dragging.current = false;
+              flingV.current = info.velocity.x;
+              resumeAt.current = performance.now() + 250;
+            }}
             className="flex w-max cursor-grab select-none items-stretch gap-5 px-5 active:cursor-grabbing"
             data-testid="reviews-track"
           >

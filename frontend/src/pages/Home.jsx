@@ -58,7 +58,11 @@ function Hero() {
       <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center px-5 pb-24 pt-36 text-center sm:px-8 lg:pt-40">
         <motion.div style={{ y: yText }} className="flex flex-col items-center">
           <Reveal y={16}>
-            <Kicker>Greater Toronto Area · Open 24 hours</Kicker>
+            <Kicker>
+              {new Date().getMonth() <= 2 || new Date().getMonth() >= 10
+                ? "Winter in the GTA · Skip the icy store run"
+                : "Greater Toronto Area · Open 24 hours"}
+            </Kicker>
           </Reveal>
           <h1 className="font-display mt-6 text-[13vw] font-extrabold leading-[0.94] tracking-tight text-white sm:text-7xl lg:text-8xl xl:text-[6.8rem]">
             <MaskedLine delay={0.1}>PURE WATER.</MaskedLine>

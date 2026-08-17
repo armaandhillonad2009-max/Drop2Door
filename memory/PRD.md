@@ -62,6 +62,11 @@ WhatsApp CTAs with context pre-filled messages; working quote modal + bulk form;
 ## Iteration 2026-08-17 (v7, owner-requested change)
 - Reviews belt is now draggable/swipeable: framer-motion drag="x" with seamless wrap-around, auto-scroll via useAnimationFrame, pauses on hover and while dragging, resumes after. Hint line "Drag or swipe · pauses on hover" added under the belt
 
+## Iteration 2026-08-17 (v8, owner-requested changes)
+- Reviews belt fling: custom inertia (pointer velocity from onDragEnd info.velocity.x, exponential decay in useAnimationFrame, seamless wrap during coast); hover pauses auto-scroll but fling still coasts
+- Gallery lightbox: tap any photo for full-screen view (blur backdrop, close X, prev/next arrows, swipe/drag between photos with 80px threshold, caption + counter, body scroll lock)
+- Hero kicker auto-switches November to March to "Winter in the GTA · Skip the icy store run"
+
 ## Verified
 - curl POST /api/quote and /api/bulk-quote: success + email sent
 - Screenshots: hero, manifesto, modal, checker both verdicts, reviews, mobile home + events
