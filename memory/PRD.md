@@ -67,6 +67,12 @@ WhatsApp CTAs with context pre-filled messages; working quote modal + bulk form;
 - Gallery lightbox: tap any photo for full-screen view (blur backdrop, close X, prev/next arrows, swipe/drag between photos with 80px threshold, caption + counter, body scroll lock)
 - Hero kicker auto-switches November to March to "Winter in the GTA · Skip the icy store run"
 
+## Iteration 2026-08-17 (v9, owner-requested changes)
+- Gallery: added real delivery video clip (`/videos/delivery.mp4`, 11s portrait, H.264+AAC, poster `delivery-poster.webp`) as a 2x2 mosaic block with a VIDEO chip; lightbox plays it with controls and sound
+- Lightbox keyboard control: Escape closes, ArrowRight/ArrowLeft navigate
+- Snowfall component: faint falling-snow overlay on homepage, winter months only (Nov to Mar), disabled for reduced-motion
+- Quote modal: WhatsApp continue message now carries the full order summary (name, customer type, product, quantity, address, postal code, preferred date/time, notes)
+
 ## Verified
 - curl POST /api/quote and /api/bulk-quote: success + email sent
 - Screenshots: hero, manifesto, modal, checker both verdicts, reviews, mobile home + events

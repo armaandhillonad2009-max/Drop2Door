@@ -226,3 +226,26 @@ html.lenis body {
         animation: none;
     }
 }
+
+@keyframes snowfall {
+    0% {
+        transform: translate3d(0, -4vh, 0);
+    }
+    100% {
+        transform: translate3d(4vw, 104vh, 0);
+    }
+}
+.snowflake {
+    position: absolute;
+    top: -4vh;
+    border-radius: 9999px;
+    background: #e0f2fe;
+    animation-name: snowfall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+    .snowflake {
+        animation: none;
+    }
+}

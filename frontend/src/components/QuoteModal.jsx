@@ -61,10 +61,13 @@ export default function QuoteModal() {
 
   const waSummary = () => {
     const parts = [
-      `Hi Drop2Door, I'm ${form.name}.`,
-      `I'd like a quote for ${form.quantity || "10+"} x ${form.product || "bottled water"}.`,
+      `Hi Drop2Door, I'm ${form.name} (${form.customer_type} customer).`,
+      `I'd like a quote for ${form.quantity || "10+"} packs/cases of ${form.product || "bottled water"}.`,
       form.address ? `Delivery to: ${form.address}${form.postal_code ? ", " + form.postal_code : ""}.` : "",
-      form.preferred_date ? `Preferred: ${form.preferred_date} ${form.preferred_time}.` : "",
+      form.preferred_date || form.preferred_time
+        ? `Preferred: ${[form.preferred_date, form.preferred_time].filter(Boolean).join(", ")}.`
+        : "",
+      form.message ? `Note: ${form.message}` : "",
     ].filter(Boolean);
     return waChat(parts.join(" "));
   };

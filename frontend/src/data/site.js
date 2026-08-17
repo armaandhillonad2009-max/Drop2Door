@@ -241,7 +241,15 @@ export const GALLERY = [
     src: "/images/brand-card.webp",
     alt: "Drop2Door Water Delivery Services brand card with red phoenix logo",
     cap: "",
-    cls: "sm:col-span-2 h-72 sm:h-80 lg:col-start-3 lg:col-span-2 lg:row-start-3",
+    cls: "sm:col-span-2 h-72 sm:h-80 lg:col-start-1 lg:col-span-2 lg:row-start-4",
+  },
+  {
+    type: "video",
+    src: "/videos/delivery.mp4",
+    poster: "/images/delivery-poster.webp",
+    alt: "Real Drop2Door delivery video clip",
+    cap: "Real delivery run, on the clock",
+    cls: "sm:col-span-2 h-96 lg:col-start-3 lg:col-span-2 lg:row-start-3 lg:row-span-2 lg:h-full",
   },
 ];
 

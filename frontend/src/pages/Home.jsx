@@ -8,6 +8,7 @@ import { WhatsAppIcon } from "@/components/icons";
 import Marquee from "@/components/Marquee";
 import Tilt from "@/components/Tilt";
 import FaintGlacier from "@/components/FaintGlacier";
+import Snowfall from "@/components/Snowfall";
 import AreaChecker from "@/components/AreaChecker";
 import Reviews from "@/components/Reviews";
 import CTABand from "@/components/CTABand";
@@ -305,6 +306,7 @@ export default function Home() {
 
   return (
     <main>
+      <Snowfall />
       <Hero />
       <Marquee />
       <Brands />

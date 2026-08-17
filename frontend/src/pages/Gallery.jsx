@@ -16,6 +16,17 @@ export default function Gallery() {
     };
   }, [active]);
 
+  useEffect(() => {
+    if (active === null) return undefined;
+    const onKey = (e) => {
+      if (e.key === "Escape") setActive(null);
+      if (e.key === "ArrowRight") setActive((a) => (a + 1) % GALLERY.length);
+      if (e.key === "ArrowLeft") setActive((a) => (a - 1 + GALLERY.length) % GALLERY.length);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [active]);
+
   return (
     <main>
       <PageHeader
@@ -36,12 +47,31 @@ export default function Gallery() {
                   data-testid={`gallery-item-${i}`}
                   onClick={() => setActive(i)}
                 >
-                  <img
-                    src={g.src}
-                    alt={g.alt}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.06]"
-                  />
+                  {g.type === "video" ? (
+                    <video
+                      src={g.src}
+                      poster={g.poster}
+                      muted
+                      loop
+                      playsInline
+                      autoPlay
+                      preload="metadata"
+                      className="h-full w-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.06]"
+                      data-testid={`gallery-video-${i}`}
+                    />
+                  ) : (
+                    <img
+                      src={g.src}
+                      alt={g.alt}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.06]"
+                    />
+                  )}
+                  {g.type === "video" && (
+                    <span className="absolute right-4 top-4 rounded-full border border-cyan-400/30 bg-[#030712]/70 px-3 py-1 font-mono2 text-[9px] uppercase tracking-[0.18em] text-cyan-300 backdrop-blur-sm">
+                      Video
+                    </span>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/70 via-transparent to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" aria-hidden="true" />
                   {g.cap && (
                     <figcaption className="absolute bottom-5 left-5 right-5">
@@ -115,12 +145,24 @@ export default function Gallery() {
               className="max-w-4xl cursor-grab active:cursor-grabbing"
               data-testid="lightbox-figure"
             >
-              <img
-                src={GALLERY[active].src}
-                alt={GALLERY[active].alt}
-                draggable="false"
-                className="max-h-[76vh] w-auto max-w-full select-none rounded-2xl border border-cyan-400/15 object-contain"
-              />
+              {GALLERY[active].type === "video" ? (
+                <video
+                  src={GALLERY[active].src}
+                  poster={GALLERY[active].poster}
+                  controls
+                  autoPlay
+                  playsInline
+                  className="max-h-[76vh] w-auto max-w-full rounded-2xl border border-cyan-400/15"
+                  data-testid="lightbox-video"
+                />
+              ) : (
+                <img
+                  src={GALLERY[active].src}
+                  alt={GALLERY[active].alt}
+                  draggable="false"
+                  className="max-h-[76vh] w-auto max-w-full select-none rounded-2xl border border-cyan-400/15 object-contain"
+                />
+              )}
               <figcaption className="mt-4 text-center">
                 {GALLERY[active].cap && (
                   <span className="font-mono2 text-[10px] uppercase tracking-[0.24em] text-cyan-200/80">
