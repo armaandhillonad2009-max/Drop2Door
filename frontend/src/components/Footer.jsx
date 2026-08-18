@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Instagram, Mail, MapPin } from "lucide-react";
 import { SITE, WA_MESSAGES, waChat } from "@/data/site";
-import { PhoenixMark, TikTokIcon, WhatsAppIcon } from "@/components/icons";
+import { TikTokIcon, WhatsAppIcon } from "@/components/icons";
 
 const PAGE_LINKS = [
   { label: "Home", to: "/" },
@@ -10,7 +11,7 @@ const PAGE_LINKS = [
   { label: "Events & Bulk Orders", to: "/events-bulk" },
   { label: "Gallery", to: "/gallery" },
   { label: "About", to: "/about" },
-  { label: "Contact", to: "/contact" },
+  { label: "Contact & FAQ", to: "/contact" },
 ];
 
 const LEGAL_LINKS = [
@@ -22,20 +23,15 @@ const LEGAL_LINKS = [
 export default function Footer() {
   return (
     <footer className="relative border-t border-cyan-400/10 bg-[#02050d]" data-testid="site-footer">
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+      <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <div className="flex items-center gap-3">
-              <PhoenixMark className="h-11 w-11" />
-              <span className="leading-none">
-                <span className="font-display block text-xl font-extrabold tracking-tight text-white">
-                  DROP<span className="text-cyan-400">2</span>DOOR
-                </span>
-                <span className="font-mono2 mt-1 block text-[9px] uppercase tracking-[0.32em] text-slate-400">
-                  Water Delivery Services
-                </span>
-              </span>
-            </div>
+            <img
+              src="/images/logo-dark.png"
+              alt="Drop2Door Water Delivery Services"
+              className="h-12 w-auto rounded-md"
+              loading="lazy"
+            />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-400">
               {SITE.tagline} Bottled spring, distilled and sparkling water delivered across the
               Greater Toronto Area since {SITE.since}.
@@ -148,6 +144,39 @@ export default function Footer() {
             </ul>
           </div>
         </div>
+
+        {/* Drawn as SVG rather than sized text: a vw-based font-size inside this
+            max-width container overflows and clips the outer letters on wide
+            screens. The viewBox scales the wordmark to the container instead, so
+            it always fits edge to edge, and textLength pins its width exactly. */}
+        <motion.svg
+          initial={{ opacity: 0.45 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 1.8, ease: "easeOut" }}
+          viewBox="0 0 560 86"
+          role="presentation"
+          aria-hidden="true"
+          data-testid="footer-wordmark"
+          className="mx-auto mt-10 w-[84%] select-none overflow-visible"
+        >
+          <text
+            x="280"
+            y="78"
+            textAnchor="middle"
+            textLength="552"
+            lengthAdjust="spacingAndGlyphs"
+            fontSize="100"
+            fontWeight="800"
+            fill="none"
+            stroke="rgba(163,209,235,0.42)"
+            strokeWidth="1.35"
+            vectorEffect="non-scaling-stroke"
+            className="font-display"
+          >
+            DROP2DOOR
+          </text>
+        </motion.svg>
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-cyan-400/10 pt-7 sm:flex-row">
           <p className="text-xs text-slate-500">

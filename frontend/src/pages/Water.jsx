@@ -14,13 +14,13 @@ export default function Water() {
     <main>
       <PageHeader
         kicker="Water we deliver"
-        lines={["Trusted brands.", "Served ice cold."]}
+        lines={["Trusted brands.", "Ready when you are."]}
         sub="Spring, distilled and sparkling water from Kirkland, Eska and Compliments. Pricing is quote-based and depends on your location and order size, so message us for exact numbers and current availability."
         image="/images/hero-strip.webp"
         title="Water We Deliver | Drop2Door Water Delivery GTA"
       />
 
-      <section className="bg-[#030712] py-16 sm:py-24" data-testid="water-products">
+      <section className="bg-[#030712] py-12 sm:py-20" data-testid="water-products">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {PRODUCTS.map((p, i) => (
@@ -75,7 +75,7 @@ export default function Water() {
         </div>
       </section>
 
-      <section className="border-y border-cyan-400/10 bg-[#02050d] py-16 sm:py-24" data-testid="water-types">
+      <section className="border-y border-cyan-400/10 bg-[#02050d] py-12 sm:py-20" data-testid="water-types">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <Kicker>Three ways to hydrate</Kicker>
@@ -105,7 +105,7 @@ export default function Water() {
         </div>
       </section>
 
-      <section className="bg-[#030712] py-16 sm:py-24" data-testid="order-rules">
+      <section className="bg-[#030712] py-12 sm:py-20" data-testid="order-rules">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <Kicker>Good to know</Kicker>

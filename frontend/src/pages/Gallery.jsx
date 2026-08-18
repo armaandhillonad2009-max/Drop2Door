@@ -37,7 +37,7 @@ export default function Gallery() {
         title="Gallery | Drop2Door Water Delivery Services"
       />
 
-      <section className="bg-[#030712] py-16 sm:py-24" data-testid="gallery-grid">
+      <section className="bg-[#030712] py-12 sm:py-20" data-testid="gallery-grid">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid auto-rows-auto grid-flow-dense grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {GALLERY.map((g, i) => (

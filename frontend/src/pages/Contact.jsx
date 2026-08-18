@@ -1,5 +1,7 @@
-import { Clock, Instagram, Mail, MapPin, Phone } from "lucide-react";
-import { SITE, WA_MESSAGES, waChat } from "@/data/site";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Clock, Instagram, Mail, MapPin, Phone, Plus } from "lucide-react";
+import { FAQS, SITE, WA_MESSAGES, waChat } from "@/data/site";
 import PageHeader from "@/components/PageHeader";
 import { Kicker, Reveal } from "@/components/Motion";
 import { TikTokIcon, WhatsAppIcon } from "@/components/icons";
@@ -34,20 +36,79 @@ const CONTACT_ROWS = [
   },
 ];
 
+function Faq() {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  return (
+    <section className="border-t border-cyan-400/10 bg-[#02050d] py-12 sm:py-20" data-testid="faq-section">
+      <div className="mx-auto max-w-3xl px-5 sm:px-8">
+        <Reveal>
+          <Kicker>Common questions</Kicker>
+          <h2 className="font-display mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Answers before you ask.
+          </h2>
+        </Reveal>
+
+        <div className="mt-10 divide-y divide-cyan-400/10 border-y border-cyan-400/10">
+          {FAQS.map((f, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <div key={f.q} data-testid={`faq-item-${i}`}>
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  aria-expanded={isOpen}
+                  data-testid={`faq-question-${i}`}
+                  className="flex w-full items-center justify-between gap-6 py-5 text-left"
+                >
+                  <span className="font-display text-lg font-bold text-white sm:text-xl">{f.q}</span>
+                  <Plus
+                    className={`h-5 w-5 shrink-0 text-cyan-300 transition-transform duration-300 ${
+                      isOpen ? "rotate-45" : ""
+                    }`}
+                  />
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="answer"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <p
+                        className="pb-6 pr-10 text-sm leading-relaxed text-slate-400"
+                        data-testid={`faq-answer-${i}`}
+                      >
+                        {f.a}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Contact() {
   const { openQuote } = useQuote();
 
   return (
     <main>
       <PageHeader
-        kicker="Contact"
+        kicker="Contact & FAQ"
         lines={["Talk to", "a real human."]}
         sub="Questions, quotes, scheduling or big orders. The fastest way to reach us is WhatsApp, and we answer around the clock."
         image="/images/bottles.webp"
-        title="Contact | Drop2Door Water Delivery Services"
+        title="Contact & FAQ | Drop2Door Water Delivery Services"
       />
 
-      <section className="bg-[#030712] py-16 sm:py-24" data-testid="contact-section">
+      <section className="bg-[#030712] py-12 sm:py-20" data-testid="contact-section">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 sm:px-8 lg:grid-cols-2">
           <div className="space-y-4">
             {CONTACT_ROWS.map((r, i) => {
@@ -163,6 +224,8 @@ export default function Contact() {
           </Reveal>
         </div>
       </section>
+
+      <Faq />
     </main>
   );
 }

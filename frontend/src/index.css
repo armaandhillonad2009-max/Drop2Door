@@ -124,6 +124,27 @@ html.lenis body {
     color: transparent;
 }
 
+/* Outlined display text: transparent fill with a stroked edge. Used for the
+   hero's second and third lines and, fainter, for the giant footer wordmark.
+   No drop-shadow filter here: on some browsers it renders as a visible
+   rectangle around gradient/outlined text. */
+.text-outline-ice {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(147, 218, 252, 0.95);
+}
+
+.text-outline-faint {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(148, 197, 224, 0.18);
+}
+
+/* Feathers all four edges of an image into the solid page background so no
+   rectangle edge is ever visible. */
+.mask-fade-all {
+    -webkit-mask-image: radial-gradient(ellipse 76% 70% at 50% 50%, #000 40%, transparent 78%);
+    mask-image: radial-gradient(ellipse 76% 70% at 50% 50%, #000 40%, transparent 78%);
+}
+
 .glass {
     background: rgba(9, 19, 34, 0.72);
     backdrop-filter: blur(20px);

@@ -15,7 +15,7 @@ export default function DeliveryAreas() {
         title="Delivery Areas | Water Delivery Brampton, Mississauga, Toronto & GTA"
       />
 
-      <section className="bg-[#030712] py-16 sm:py-24">
+      <section className="bg-[#030712] py-12 sm:py-20">
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
           <Reveal>
             <AreaChecker />
@@ -23,7 +23,7 @@ export default function DeliveryAreas() {
         </div>
       </section>
 
-      <section className="border-t border-cyan-400/10 bg-[#02050d] py-16 sm:py-24" data-testid="city-grid-section">
+      <section className="border-t border-cyan-400/10 bg-[#02050d] py-12 sm:py-20" data-testid="city-grid-section">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <Kicker>Regular routes</Kicker>

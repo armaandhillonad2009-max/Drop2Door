@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ChevronDown, Clock, MapPin, Package } from "lucide-react";
@@ -15,6 +15,10 @@ import CTABand from "@/components/CTABand";
 
 function Hero() {
   const ref = useRef(null);
+  // Some phones (e.g. iPhone Low Power Mode) block autoplay and paint a large
+  // play glyph over the poster frame, which collided with the hero title.
+  // Keeping the video fully transparent until it actually plays hides it.
+  const [vidPlaying, setVidPlaying] = useState(false);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const yText = useTransform(scrollYProgress, [0, 1], [0, -60]);
   const vidFade = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
@@ -36,10 +40,12 @@ function Hero() {
             loop
             playsInline
             preload="auto"
+            disablePictureInPicture
+            onPlaying={() => setVidPlaying(true)}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
+            animate={{ opacity: vidPlaying ? 0.62 : 0 }}
             transition={{ duration: 2.6, ease: "easeOut" }}
-            className="h-full w-full object-cover brightness-[0.75] saturate-[1.15]"
+            className="h-full w-full object-cover brightness-[0.85] saturate-[1.15]"
             data-testid="hero-glacier-video"
           >
             <source src="/videos/glacier-mobile.mp4" type="video/mp4" media="(max-width: 640px)" />
@@ -47,7 +53,7 @@ function Hero() {
             <source src="/videos/glacier.mp4" type="video/mp4" />
             <source src="/videos/glacier.webm" type="video/webm" />
           </motion.video>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#030712]/55 via-[#030712]/30 to-[#030712]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#030712]/45 via-[#030712]/20 to-[#030712]" />
         </motion.div>
       )}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
@@ -65,15 +71,25 @@ function Hero() {
                 : "Greater Toronto Area · Open 24 hours"}
             </Kicker>
           </Reveal>
-          <h1 className="font-display mt-6 text-[13vw] font-extrabold leading-[0.94] tracking-tight text-white sm:text-7xl lg:text-8xl xl:text-[6.8rem]">
-            <MaskedLine delay={0.1}>PURE WATER.</MaskedLine>
-            <MaskedLine delay={0.22}>
-              <span className="text-gradient-ice">DELIVERED TO</span>
-            </MaskedLine>
-            <MaskedLine delay={0.34}>
-              <span className="text-gradient-ice">YOUR DOOR.</span>
-            </MaskedLine>
-          </h1>
+          <div className="relative">
+            {/* Blurred halo behind the title. A drop-shadow() filter on the text
+                itself renders as a translucent rectangle in some browsers. */}
+            <div
+              className="pointer-events-none absolute inset-0 -z-10 m-auto h-3/5 w-4/5 rounded-full bg-cyan-400/15 blur-[100px]"
+              aria-hidden="true"
+            />
+            <h1 className="font-display mt-6 text-[13vw] font-extrabold leading-[0.94] tracking-tight text-white sm:text-7xl lg:text-8xl xl:text-[6.8rem]">
+              <MaskedLine delay={0.1}>
+                <span className="text-gradient-ice">PURE WATER.</span>
+              </MaskedLine>
+              <MaskedLine delay={0.22}>
+                <span className="text-outline-ice">DELIVERED TO</span>
+              </MaskedLine>
+              <MaskedLine delay={0.34}>
+                <span className="text-outline-ice">YOUR DOOR.</span>
+              </MaskedLine>
+            </h1>
+          </div>
           <Reveal delay={0.5}>
             <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">
               Bottled water delivery across the GTA for homes, businesses, restaurants, hotels,
@@ -133,14 +149,17 @@ function Hero() {
 
 function Brands() {
   return (
-    <section className="relative bg-[#030712] py-20 sm:py-24" data-testid="brands-section">
+    <section className="relative bg-[#030712] py-16 sm:py-20" data-testid="brands-section">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <Reveal>
             <Kicker>The lineup</Kicker>
             <h2 className="font-display mt-4 max-w-xl text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-              Brands you know. <span className="text-gradient-ice">Cold you can taste.</span>
+              Brands you know. <span className="text-gradient-ice">Refreshment you can taste.</span>
             </h2>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400" data-testid="brands-price-note">
+              Very reasonably priced. Message us for a fast quote.
+            </p>
           </Reveal>
           <Reveal delay={0.15}>
             <Link
@@ -201,7 +220,7 @@ function Brands() {
 
 function Manifesto() {
   return (
-    <section className="relative bg-[#02050d] py-20 sm:py-24" data-testid="manifesto-section">
+    <section className="relative bg-[#02050d] py-16 sm:py-20" data-testid="manifesto-section">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
           <Kicker>Why Drop2Door</Kicker>
@@ -210,7 +229,7 @@ function Manifesto() {
           </h2>
         </Reveal>
 
-        <div className="mt-16 space-y-20">
+        <div className="mt-12 space-y-14">
           {MANIFESTO.map((m, i) => (
             <div
               key={m.n}
@@ -250,32 +269,32 @@ function Manifesto() {
 }
 
 function FilmStrip() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
-
   return (
-    <section ref={ref} className="relative overflow-hidden bg-[#030712]" data-testid="film-strip">
-      <motion.img
-        src="/images/hero-strip.webp"
-        alt="Cinematic Drop2Door visual: chilled bottles of Eska, Kirkland and Compliments on ice"
-        style={{ y, scale: 1.15 }}
-        className="h-[55vh] w-full object-cover sm:h-[75vh]"
-        loading="lazy"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712]" aria-hidden="true" />
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
-        <span className="font-mono2 text-[10px] uppercase tracking-[0.3em] text-cyan-200/70">
-          Drop2Door · Ice cold by design
-        </span>
-      </div>
+    <section className="relative bg-[#030712] py-6" data-testid="film-strip">
+      <Reveal>
+        <div className="mx-auto max-w-3xl px-5 sm:px-8">
+          {/* No frame: the radial mask dissolves all four edges into the page
+              background so the bottles appear to emerge from it. */}
+          <img
+            src="/images/hero-strip.webp"
+            alt="Drop2Door bottles of Eska, Kirkland and Compliments water"
+            className="mask-fade-all h-auto w-full"
+            loading="lazy"
+          />
+          <p className="mt-2 text-center">
+            <span className="font-mono2 text-[10px] uppercase tracking-[0.3em] text-cyan-200/70">
+              Drop2Door · Pure by design
+            </span>
+          </p>
+        </div>
+      </Reveal>
     </section>
   );
 }
 
 function CheckerSection() {
   return (
-    <section id="area-checker" className="relative scroll-mt-24 overflow-hidden bg-[#02050d] py-20 sm:py-24" data-testid="home-checker-section">
+    <section id="area-checker" className="relative scroll-mt-24 overflow-hidden bg-[#02050d] py-16 sm:py-20" data-testid="home-checker-section">
       <FaintGlacier opacity={0.18} testid="checker-glacier" />
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
         <Reveal>
