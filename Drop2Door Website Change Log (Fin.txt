@@ -1,0 +1,108 @@
+# Drop2Door Website: Change Log (Final Round)
+
+How to navigate: all paths start from the project root `/app`. In the code editor's file tree, open `frontend`, then `src`, then the folder/file listed.
+
+## 1. Hero outline font ("DELIVERED TO YOUR DOOR.")
+- File: `frontend/src/pages/Home.jsx` (the Hero component, h1 block)
+  - The two `<span className="text-gradient-ice">` lines became `className="text-outline-ice"`.
+- File: `frontend/src/index.css`
+  - Added two classes: `.text-outline-ice` (transparent fill + `-webkit-text-stroke: 1.5px` icy blue, used in the hero) and `.text-outline-faint` (1px faint stroke, used for the footer wordmark).
+
+## 2. Mobile play icon overlapping the hero title (bug fix)
+- File: `frontend/src/pages/Home.jsx`
+  - Cause: on some phones (iPhone Low Power Mode blocks autoplay), the video element shows a big play glyph. Fix: the video now stays invisible until it is actually playing.
+  - Added `const [vidPlaying, setVidPlaying] = useState(false);` in Hero.
+  - On the `<motion.video>`: added `disablePictureInPicture`, `onPlaying={() => setVidPlaying(true)}`, and changed `animate={{ opacity: 0.5 }}` to `animate={{ opacity: vidPlaying ? 0.5 : 0 }}`.
+
+## 3. FAQ section on Contact (now "Contact & FAQ")
+- File: `frontend/src/data/site.js`
+  - Added `export const FAQS = [...]` with the 6 questions and answers (minimum order, delivery cost, fastest way to order, scheduling, subscriptions, cancellation/refund). Edit questions or answers here.
+- File: `frontend/src/pages/Contact.jsx`
+  - New imports at top: `useState`, `AnimatePresence`, `motion`, `Plus` icon, and `FAQS`.
+  - Added the `Faq()` component (accordion rows: question + rotating plus icon, click to expand the answer with a smooth height animation) and rendered `<Faq />` under the contact section.
+  - PageHeader kicker changed to "Contact & FAQ" and the browser tab title to "Contact & FAQ | Drop2Door Water Delivery Services".
+
+## 4. Footer
+- File: `frontend/src/components/Footer.jsx`
+  - Brand block: the phoenix circle + text stack was replaced with `<img src="/images/logo-dark.png" ...>` (the same logo image used in the top navbar).
+  - Added a giant outlined "DROP2DOOR" wordmark above the bottom bar: a div with `data-testid="footer-wordmark"` using the new `.text-outline-faint` class at `text-[17vw]` (scales with screen width).
+  - Removed the now-unused `PhoenixMark` import.
+
+## 5. Film strip scaling (3 bottles image before the delivery zone)
+- File: `frontend/src/pages/Home.jsx` (the `FilmStrip()` component)
+  - Removed the parallax `useScroll`/`useTransform`/`scale: 1.15` setup that was cropping the image.
+  - The `<img>` now uses `className="h-auto w-full"` so the full picture shows with no cropping, wrapped in a `<Reveal>` fade, with soft top/bottom gradient fades instead.
+
+## Notes
+- The winter snow overlay and winter hero line activate automatically November through March (files: `frontend/src/components/Snowfall.jsx` and the Hero kicker in `Home.jsx`).
+- All editable business content (reviews, products, cities, gallery items, FAQ, contact info) lives in `frontend/src/data/site.js`.
+
+## Follow-up tweaks (latest)
+- File: `frontend/src/pages/Home.jsx`
+  - Hero bottom-half text reverted from `.text-outline-ice` back to the original `.text-gradient-ice` fill (outline style now lives only on the footer wordmark).
+- File: `frontend/src/data/site.js`
+  - `NAV_LINKS`: the Contact entry label is now "Contact & FAQ" (route still `/contact`).
+- File: `frontend/src/components/Footer.jsx`
+  - Added `import { motion } from "framer-motion"` and changed the giant wordmark `<p>` to a `<motion.p>` that fades from 45% opacity to full with a very faint cyan drop-shadow as it scrolls into view (once, 1.8s ease-out).
+
+## Follow-up tweaks (round 2)
+- File: `frontend/src/components/Footer.jsx`
+  - `PAGE_LINKS`: the Contact entry label is now "Contact & FAQ", matching the navbar.
+- File: `frontend/src/pages/Home.jsx`
+  - Hero: "PURE WATER." now uses `.text-gradient-ice` (white fading into icy blue); "DELIVERED TO YOUR DOOR." uses the `.text-outline-ice` outline style.
+  - `FilmStrip()`: the 3-bottles image is now a contained framed card (`max-w-5xl`, rounded corners, glow border, small padding) instead of full screen width, so it takes less vertical space on desktop.
+
+## Follow-up tweaks (round 3)
+- File: `frontend/src/components/Navbar.jsx`
+  - Navbar logo image height bumped slightly: `h-10` to `h-11` on mobile and `sm:h-11` to `sm:h-12` on larger screens.
+  - Logo now shrinks when the navbar condenses on scroll: class is dynamic on the existing `scrolled` state (`h-9 sm:h-10` scrolled, `h-11 sm:h-12` at top), with `transition-all` for a smooth size change.
+  - Navbar now hides when scrolling down and returns when scrolling up: added a `hidden` state with scroll-direction tracking in the scroll effect (hides past 140px of downward scroll), and the header gets `-translate-y-full` / `translate-y-0` accordingly. It stays visible while the mobile menu is open.
+  - UPDATE (reverted same day): owner asked to keep the navbar visible at all times, so the hide-on-scroll behavior was removed. The logo shrink-on-scroll remains.
+
+## Follow-up tweaks (round 4)
+- File: `frontend/src/components/Navbar.jsx`
+  - Added a scroll progress hairline: `useScroll` from framer-motion gives `scrollYProgress`, rendered as a `<motion.span>` at the bottom edge of the header with `style={{ scaleX: scrollYProgress }}` and a cyan gradient. Fills left to right as you read down any page.
+- File: `frontend/src/pages/Home.jsx`
+  - `FilmStrip()`: back to a full-width band that fades into the background top and bottom, but shorter now (`h-[34vh] sm:h-[46vh]`) so it takes less space.
+  - Manifesto chapters: `mt-16 space-y-20` reduced to `mt-12 space-y-14`; home sections `py-20 sm:py-24` reduced to `py-16 sm:py-20`.
+- Spacing trim across pages: every `py-16 sm:py-24` section became `py-12 sm:py-20` (Water, DeliveryAreas, Events, Gallery, About, Contact, Legal); CTABand and Reviews `py-20 sm:py-24` became `py-16 sm:py-20`.
+- File: `frontend/src/components/PageHeader.jsx` - header padding reduced (`pb-12 pt-32 sm:pb-16 sm:pt-40`).
+- File: `frontend/src/components/Footer.jsx` - footer padding `py-16` to `py-12`, wordmark margin `mt-16` to `mt-10`.
+
+## Follow-up tweaks (round 5)
+- Asset edit (not code): `frontend/public/images/hero-strip.webp` was rebuilt from the original collage. The bottles strip (846x680) is now centered on a 3400x680 canvas whose sides are a blurred, darkened enlargement of the same image. Result: the band keeps its height (`h-[34vh] sm:h-[46vh]`, code unchanged in `FilmStrip()` in `Home.jsx`) but the bottles stay about 90 to 95 percent visible vertically on desktop, and fully visible on mobile.
+- UPDATE (same day): owner disliked the blurred sides. The asset is now the clean, untouched 846x680 strip again, and `FilmStrip()` in `frontend/src/pages/Home.jsx` is a centered framed card (`max-w-5xl`, rounded, glow border, caption inside: "Drop2Door · Pure by design").
+- UPDATE 2 (same day): owner wanted full-bleed after all. `FilmStrip()` is now the full-width, full-height image (`h-auto w-full`, no card, no cropping) with strong top and bottom gradient fades (`h-32`) melting it into the page background.
+- UPDATE 3 (same day): final tuning. Desktop uses a new asset `frontend/public/images/hero-strip-wide.webp` (2560x680: the clean strip centered over heavily blurred, darkened edge fills, no ghost shapes) at `h-[60vh]` with `object-cover` and `object-position: center 55%`, so bottle caps and bottoms fade slightly while labels and most of each bottle stay visible. Mobile keeps the untouched `hero-strip.webp` via a `<picture>` source swap at `h-[48vh]`.
+- UPDATE 4 (same day, final): owner wanted no box at all. `FilmStrip()` now shows the clean `hero-strip.webp` centered (`max-w-6xl`, full image, `h-auto`) with a new `.mask-fade-all` class in `frontend/src/index.css` (radial-gradient mask) feathering all four edges into the solid page background. Caption sits below the image. The wide asset is no longer used by the strip.
+- UPDATE 5 (final): owner wanted it smaller and fully dissolved. Strip container reduced to `max-w-3xl` and the mask strengthened to `radial-gradient(ellipse 76% 70% at 50% 50%, #000 40%, transparent 78%)` so no rectangle edge is ever visible; bottles emerge from the solid background on all sides.
+
+## Hero glow pass (latest)
+- File: `frontend/src/pages/Home.jsx`
+  - Hero video: `opacity` peak raised 0.5 to 0.62, `brightness-[0.75]` to `brightness-[0.85]`, and the dark overlay over it lightened (`from-[#030712]/45 via-[#030712]/20`) so the glacier motion is more visible.
+  - "PURE WATER." span gained `drop-shadow-[0_0_28px_rgba(56,189,248,0.35)]`.
+- File: `frontend/src/index.css`
+  - `.text-outline-ice`: stroke brightened to `rgba(147,218,252,0.95)` and added a soft `drop-shadow(0 0 20px rgba(56,189,248,0.3))` glow.
+
+## Box-artifact fix (latest)
+- Owner reported a faint translucent box around "PURE WATER." Cause: `drop-shadow()` filters on gradient/outlined text render as a rectangle on some browsers.
+- File: `frontend/src/pages/Home.jsx` - removed the drop-shadow class from the "PURE WATER." span; the h1 is now wrapped in a relative div with a blurred cyan halo behind it (`bg-cyan-400/15 blur-[100px]`, pointer-events-none), which cannot produce a box.
+- File: `frontend/src/index.css` - removed the `filter: drop-shadow(...)` from `.text-outline-ice`; the outline lines keep just their brighter stroke.
+
+## Manifesto 04 image reframe (latest)
+- Owner: the photo beside "04 Across the GTA" was too zoomed into the delivery dolly. The photo is portrait and the card frame is landscape, so cover-cropping zoomed in.
+- Asset: created `frontend/public/images/manifesto-gta.webp`, a wider reframed crop (top 52 percent) of `sidewalk.webp` that favors the stacked water cases.
+- File: `frontend/src/data/site.js` - manifesto chapter 04 `image` now points to `/images/manifesto-gta.webp` with an updated alt. No layout or formatting code changed.
+
+## Copy fix: no temperature claims (owner: water is delivered at normal temperature)
+- `frontend/src/components/CTABand.jsx` - default title "Cold water. Zero heavy lifting." became "Pure water. Zero heavy lifting."
+- `frontend/src/pages/Home.jsx` - brands heading "Cold you can taste." became "Refreshment you can taste."; film strip caption and image alt updated.
+- `frontend/src/data/site.js` - manifesto chapter 01 title "Real brands, really cold" became "Real brands, zero hassle".
+- `frontend/src/pages/Water.jsx` - page header second line "Served ice cold." became "Ready when you are."
+- `frontend/src/pages/About.jsx` - value card "Cold and careful" became "Handled with care" (Snowflake icon swapped to Droplets; text now says water arrives in perfect condition).
+
+
+## Pricing message pass (latest)
+- Owner asked for the "very reasonably priced" and "won't beat the prices" message in two visible spots.
+- File: `frontend/src/pages/Home.jsx` (the `Brands()` section) - added a subline under the heading: "Very reasonably priced. Message us for a fast quote." (with `data-testid="brands-price-note"`).
+- File: `frontend/src/components/CTABand.jsx` - the default `sub` line now starts with "You won't beat our prices." so the message shows at the bottom call-to-action on every page.

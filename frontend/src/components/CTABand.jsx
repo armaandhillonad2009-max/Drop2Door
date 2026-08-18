@@ -6,8 +6,8 @@ import { Kicker, Reveal } from "@/components/Motion";
 
 export default function CTABand({
   kicker = "Ready when you are",
-  title = "Cold water. Zero heavy lifting.",
-  sub = "Message us on WhatsApp for a fast quote, or send a delivery request and we will contact you to confirm details and pricing.",
+  title = "Pure water. Zero heavy lifting.",
+  sub = "You won't beat our prices. Message us on WhatsApp for a fast quote, or send a delivery request and we will contact you to confirm details and pricing.",
   waMessage = WA_MESSAGES.general,
   showGlacier = false,
 }) {
@@ -16,7 +16,7 @@ export default function CTABand({
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   return (
-    <section className="relative overflow-hidden bg-[#030712] py-20 sm:py-24" data-testid="cta-band">
+    <section className="relative overflow-hidden bg-[#030712] py-16 sm:py-20" data-testid="cta-band">
       {showGlacier && !reducedMotion && (
         <motion.div
           initial={{ opacity: 0 }}

@@ -1,4 +1,4 @@
-import { CalendarClock, MapPin, Package, Snowflake, Users } from "lucide-react";
+import { CalendarClock, Droplets, MapPin, Package, Users } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import CTABand from "@/components/CTABand";
 import { Kicker, Reveal } from "@/components/Motion";
@@ -12,9 +12,9 @@ const FACTS = [
 
 const VALUES = [
   {
-    icon: Snowflake,
-    t: "Cold and careful",
-    d: "Water stored and transported properly, so it arrives as crisp as it left the source.",
+    icon: Droplets,
+    t: "Handled with care",
+    d: "Water stored and transported properly, so it arrives in perfect condition.",
   },
   {
     icon: CalendarClock,
@@ -39,7 +39,7 @@ export default function About() {
         title="About | Drop2Door Water Delivery Services"
       />
 
-      <section className="bg-[#030712] py-16 sm:py-24" data-testid="about-story">
+      <section className="bg-[#030712] py-12 sm:py-20" data-testid="about-story">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-14 px-5 sm:px-8 lg:grid-cols-2">
           <div>
             <Reveal>
@@ -104,7 +104,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="border-t border-cyan-400/10 bg-[#02050d] py-16 sm:py-24">
+      <section className="border-t border-cyan-400/10 bg-[#02050d] py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <Kicker>How we work</Kicker>

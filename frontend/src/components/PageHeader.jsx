@@ -7,7 +7,7 @@ export default function PageHeader({ kicker, lines, sub, image, title }) {
   }, [title]);
 
   return (
-    <section className="noise relative overflow-hidden bg-[#030712] pb-16 pt-36 sm:pb-20 sm:pt-44">
+    <section className="noise relative overflow-hidden bg-[#030712] pb-12 pt-32 sm:pb-16 sm:pt-40">
       {image && (
         <div className="absolute inset-0" aria-hidden="true">
           <img src={image} alt="" className="h-full w-full object-cover opacity-25" />

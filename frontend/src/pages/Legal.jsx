@@ -4,7 +4,7 @@ import { SITE } from "@/data/site";
 
 function LegalBody({ sections }) {
   return (
-    <section className="bg-[#030712] py-16 sm:py-24">
+    <section className="bg-[#030712] py-12 sm:py-20">
       <div className="mx-auto max-w-3xl px-5 sm:px-8">
         <Reveal>
           <p className="font-mono2 text-[10px] uppercase tracking-[0.24em] text-slate-500">

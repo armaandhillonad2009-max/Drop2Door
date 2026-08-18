@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS, WA_MESSAGES, waChat } from "@/data/site";
 import { useQuote } from "@/context/QuoteContext";
@@ -11,6 +11,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { openQuote } = useQuote();
   const location = useLocation();
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -34,7 +35,9 @@ export default function Navbar() {
             <img
               src="/images/logo-dark.png"
               alt="Drop2Door Water Delivery Services"
-              className="h-10 w-auto rounded-md transition-transform duration-500 group-hover:scale-[1.04] sm:h-11"
+              className={`w-auto rounded-md transition-all duration-500 group-hover:scale-[1.04] ${
+                scrolled ? "h-9 sm:h-10" : "h-11 sm:h-12"
+              }`}
             />
           </Link>
 
@@ -84,6 +87,14 @@ export default function Navbar() {
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
+
+        {/* Reading progress hairline along the bottom edge of the header. */}
+        <motion.span
+          style={{ scaleX: scrollYProgress }}
+          className="absolute inset-x-0 bottom-0 h-px origin-left bg-gradient-to-r from-cyan-400/0 via-cyan-400 to-cyan-300"
+          data-testid="nav-scroll-progress"
+          aria-hidden="true"
+        />
       </header>
 
       <AnimatePresence>

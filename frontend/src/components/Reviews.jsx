@@ -44,7 +44,7 @@ export default function Reviews() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#030712] py-20 sm:py-24" data-testid="reviews-section">
+    <section className="relative overflow-hidden bg-[#030712] py-16 sm:py-20" data-testid="reviews-section">
       <FaintGlacier opacity={0.2} testid="reviews-glacier" />
       <div
         className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[140px]"

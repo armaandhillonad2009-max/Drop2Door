@@ -204,7 +204,7 @@ export default function Events() {
         title="Events & Bulk Water Delivery | Drop2Door GTA"
       />
 
-      <section className="bg-[#030712] py-16 sm:py-24">
+      <section className="bg-[#030712] py-12 sm:py-20">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 sm:px-8 lg:grid-cols-2">
           <div>
             <Reveal>

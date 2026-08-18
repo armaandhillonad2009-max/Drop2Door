@@ -31,7 +31,7 @@ export const NAV_LINKS = [
   { label: "Events & Bulk", to: "/events-bulk" },
   { label: "Gallery", to: "/gallery" },
   { label: "About", to: "/about" },
-  { label: "Contact", to: "/contact" },
+  { label: "Contact & FAQ", to: "/contact" },
 ];
 
 export const PRODUCTS = [
@@ -157,10 +157,38 @@ export const CITIES = [
   "Peel Region",
 ];
 
+// Shown as the accordion on the Contact & FAQ page. Edit questions and answers here.
+export const FAQS = [
+  {
+    q: "Is there a minimum order?",
+    a: "Yes. The minimum delivery order is 10 packs or cases. Eska is available in 35-pack cases only. There is no maximum, and we regularly handle full loads for events, restaurants and offices.",
+  },
+  {
+    q: "How much does delivery cost?",
+    a: "Pricing is quote-based and depends on your location and order size, and it is very reasonably priced. Send us your address and what you need, and we will confirm the exact price before anything is scheduled.",
+  },
+  {
+    q: "What is the fastest way to order?",
+    a: "WhatsApp. One message with your address and what you need is all it takes, and we answer around the clock. You can also send a request form on this site and we will contact you.",
+  },
+  {
+    q: "How does scheduling work?",
+    a: "We are open 24 hours for delivery. You pick the day and the time window, we confirm it, and we show up. Deliveries are always scheduled in advance since we do not run a public storefront.",
+  },
+  {
+    q: "Do I have to sign up for a subscription?",
+    a: "No. There are no subscriptions and no lock-in. Order when you need water, as often or as rarely as you like.",
+  },
+  {
+    q: "Can I cancel a delivery?",
+    a: "Yes, with at least 24 hours notice before your confirmed delivery time, by WhatsApp, phone or email. We do not accept returns or offer refunds on water that has already been delivered, but if something is wrong with your order, contact us and we will review it.",
+  },
+];
+
 export const MANIFESTO = [
   {
     n: "01",
-    title: "Real brands, really cold",
+    title: "Real brands, zero hassle",
     body: "Kirkland, Eska and Compliments. Spring, distilled and sparkling. The water you already trust, stocked and handled with care.",
     image: "/images/water5.webp",
     alt: "Drop2Door stock of Eska and Kirkland water cases",
@@ -183,8 +211,8 @@ export const MANIFESTO = [
     n: "04",
     title: "Across the GTA",
     body: "Brampton, Mississauga, Toronto, Caledon, Milton and the wider GTA. Not sure if we reach you? Ask us on WhatsApp and we will figure it out.",
-    image: "/images/sidewalk.webp",
-    alt: "Drop2Door delivery vehicle interior organized with water cases and a dolly",
+    image: "/images/manifesto-gta.webp",
+    alt: "Drop2Door water cases stacked for a GTA delivery",
   },
 ];
 
