@@ -157,6 +157,47 @@ export const CITIES = [
   "Peel Region",
 ];
 
+// Forward sortation areas (the first three characters of a postal code) inside our
+// regular delivery rotation, mapped to the community each one covers. Every Toronto
+// code starts with "M" and is matched by rule, so only the surrounding "L" codes are
+// listed here. Add a code here to extend coverage; see checkArea in AreaChecker.jsx.
+export const SERVICE_FSAS = {
+  // Brampton
+  L6P: "Brampton", L6R: "Brampton", L6S: "Brampton", L6T: "Brampton", L6V: "Brampton",
+  L6W: "Brampton", L6X: "Brampton", L6Y: "Brampton", L6Z: "Brampton", L7A: "Brampton",
+  // Mississauga (L4T is Malton)
+  L4T: "Malton", L4V: "Mississauga", L4W: "Mississauga", L4X: "Mississauga",
+  L4Y: "Mississauga", L4Z: "Mississauga", L5A: "Mississauga", L5B: "Mississauga",
+  L5C: "Mississauga", L5E: "Mississauga", L5G: "Mississauga", L5H: "Mississauga",
+  L5J: "Mississauga", L5K: "Mississauga", L5L: "Mississauga", L5M: "Mississauga",
+  L5N: "Mississauga", L5P: "Mississauga", L5R: "Mississauga", L5S: "Mississauga",
+  L5T: "Mississauga", L5V: "Mississauga", L5W: "Mississauga",
+  // Caledon and Bolton
+  L7C: "Caledon", L7K: "Caledon", L0N: "Caledon", L0P: "Caledon", L7E: "Bolton",
+  // Milton
+  L9E: "Milton", L9T: "Milton",
+  // Vaughan, Woodbridge, Maple, Thornhill
+  L4H: "Woodbridge", L4L: "Woodbridge", L4K: "Vaughan", L4J: "Thornhill",
+  L3T: "Thornhill", L6A: "Maple",
+  // Richmond Hill
+  L4B: "Richmond Hill", L4C: "Richmond Hill", L4E: "Richmond Hill", L4S: "Richmond Hill",
+  // Markham
+  L3P: "Markham", L3R: "Markham", L3S: "Markham", L6B: "Markham", L6C: "Markham",
+  L6E: "Markham", L6G: "Markham",
+  // Newmarket, Aurora, King City
+  L3X: "Newmarket", L3Y: "Newmarket", L4G: "Aurora", L7B: "King City",
+  // Oakville, Burlington, Halton Hills
+  L6H: "Oakville", L6J: "Oakville", L6K: "Oakville", L6L: "Oakville", L6M: "Oakville",
+  L7L: "Burlington", L7M: "Burlington", L7N: "Burlington", L7P: "Burlington",
+  L7R: "Burlington", L7S: "Burlington", L7T: "Burlington",
+  L7G: "Georgetown", L7J: "Halton Hills",
+  // Durham
+  L1V: "Pickering", L1W: "Pickering", L1X: "Pickering", L1Y: "Pickering",
+  L1S: "Ajax", L1T: "Ajax", L1Z: "Ajax",
+  L1M: "Whitby", L1N: "Whitby", L1P: "Whitby", L1R: "Whitby",
+  L1G: "Oshawa", L1H: "Oshawa", L1J: "Oshawa", L1K: "Oshawa", L1L: "Oshawa",
+};
+
 // Shown as the accordion on the Contact & FAQ page. Edit questions and answers here.
 export const FAQS = [
   {

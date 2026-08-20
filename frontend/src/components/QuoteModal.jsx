@@ -62,6 +62,10 @@ export default function QuoteModal() {
   const blur = (k) => () =>
     setErrors((prev) => ({ ...prev, [k]: validateField(k, form[k]) }));
 
+  // Postal codes are conventionally uppercase (L6Y 1A1, not l6y 1a1).
+  const setUpper = (k) => (e) =>
+    setForm((f) => ({ ...f, [k]: e.target.value.toUpperCase() }));
+
   const bumpQty = (d) =>
     setForm((f) => {
       const next = Math.max(1, (parseInt(f.quantity, 10) || 0) + d);
@@ -217,7 +221,7 @@ export default function QuoteModal() {
                   </div>
                   <div>
                     <label className={LABEL_CLS} htmlFor="q-postal">Postal code</label>
-                    <input id="q-postal" data-testid="quote-postal-input" className={FIELD_CLS} value={form.postal_code} onChange={set("postal_code")} placeholder="L6Y 1A1" />
+                    <input id="q-postal" data-testid="quote-postal-input" className={FIELD_CLS} value={form.postal_code} onChange={setUpper("postal_code")} placeholder="L6Y 1A1" />
                   </div>
                   <div>
                     <label className={LABEL_CLS} htmlFor="q-product">Water / product</label>
