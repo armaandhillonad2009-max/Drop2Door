@@ -1,21 +1,25 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, MapPin, ScanSearch, XCircle } from "lucide-react";
-import { CITIES, WA_MESSAGES, waChat } from "@/data/site";
+import { CITIES, SERVICE_FSAS, WA_MESSAGES, waChat } from "@/data/site";
 import { WhatsAppIcon } from "@/components/icons";
 
-const GTA_L_SECOND = new Set(["1", "3", "4", "5", "6", "7"]);
+// A postal code is matched on its forward sortation area (first three characters).
+// Every Toronto code starts with "M"; everything else is looked up in SERVICE_FSAS,
+// which is the editable coverage list in data/site.js.
+const prettyCode = (compact) =>
+  compact.length > 3 ? `${compact.slice(0, 3)} ${compact.slice(3)}` : compact;
 
 export function checkArea(raw) {
   const v = raw.trim();
   if (!v) return null;
-  const compact = v.toUpperCase().replace(/\s/g, "");
-  if (/^[A-Z]\d[A-Z]\d[A-Z]\d$/.test(compact) || /^[A-Z]\d[A-Z]$/.test(compact)) {
-    const letter = compact[0];
-    if (letter === "M" || (letter === "L" && GTA_L_SECOND.has(compact[1]))) {
-      return { ok: true, label: v.toUpperCase() };
-    }
-    return { ok: false, label: v.toUpperCase() };
+  const compact = v.toUpperCase().replace(/[\s-]/g, "");
+  if (/^[A-Z]\d[A-Z](\d[A-Z]\d)?$/.test(compact)) {
+    const fsa = compact.slice(0, 3);
+    if (fsa[0] === "M") return { ok: true, label: "Toronto", code: fsa };
+    const covered = SERVICE_FSAS[fsa];
+    if (covered) return { ok: true, label: covered, code: fsa };
+    return { ok: false, label: prettyCode(compact) };
   }
   const city = CITIES.find(
     (c) => c.toLowerCase() === v.toLowerCase() || v.toLowerCase().includes(c.toLowerCase()),
@@ -69,7 +73,10 @@ export default function AreaChecker({ compact = false }) {
             <MapPin className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-cyan-400/60" />
             <input
               value={value}
-              onChange={(e) => setValue(e.target.value)}
+              onChange={(e) => {
+                const next = e.target.value;
+                setValue(/^[a-zA-Z]\d/.test(next) ? next.toUpperCase() : next);
+              }}
               placeholder="Postal code or city (e.g. L6Y 1A1 or Brampton)"
               aria-label="Postal code or city"
               data-testid="area-checker-input"
@@ -120,7 +127,8 @@ export default function AreaChecker({ compact = false }) {
                       <CheckCircle2 className="h-5 w-5" /> Yes, we deliver to your area.
                     </p>
                     <p className="mt-1.5 text-sm text-slate-300">
-                      {result.label} is inside our regular delivery zone. Deliveries are scheduled
+                      {result.code ? `${result.label} (${result.code})` : result.label} is inside
+                      our regular delivery zone. Deliveries are scheduled
                       around the clock, usually within 24 hours.
                     </p>
                     <a
